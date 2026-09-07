@@ -13,3 +13,4 @@ python-pptx
 openpyxl
 Pillow
 reportlab
+gunicorn
