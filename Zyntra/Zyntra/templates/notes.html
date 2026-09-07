@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zyntra Notes</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/notes.css') }}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/topbar.css') }}">
+
+</head>
+
+<body>
+
+    {% include "includes/topbar.html" %}
+    {% include "includes/sidebar.html" %}
+
+
+<div class="main">
+
+
+    <h1 class="page-title">
+        <i class="fa-solid fa-note-sticky"></i>
+        My Notes
+    </h1><br>
+
+  
+<form method="GET" action="/notes" class="search-form">
+
+    <input
+        class="search-input"
+        type="text"
+        name="search"
+        placeholder="Search Notes..."
+        value="{{ request.args.get('search','') }}">
+
+    <button class="search-btn" type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        Search
+    </button>
+
+</form>
+    
+
+
+    <div class="add-note">
+
+        <form method="POST">
+
+            <input
+            type="text"
+            name="title"
+            placeholder="Note Title"
+            required>
+
+            <textarea
+            name="description"
+            placeholder="Write your note..."
+            required></textarea>
+
+            <button type="submit">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add Note
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="notes-grid">
+
+        {% for note in notes %}
+
+        <div class="note-card">
+
+            <h2>{{ note.title }}</h2>
+
+            <p>{{ note.description }}</p>
+            <small class="note-time">
+    {{ note.time_text }}
+</small>
+
+            <div class="note-footer">
+
+                <a href="/edit-note/{{ note._id }}" class="edit">
+    <i class="fa-solid fa-pen"></i>
+    Edit
+</a>
+
+                <a href="/delete-note/{{ note._id }}" class="delete">
+    <i class="fa-solid fa-trash"></i>
+    Delete
+</a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+<script>
+window.onload = function () {
+    window.scrollTo(0, 0);
+};
+</script>
+</body>
+
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Analyzer</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/ai_analyzer.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+
+      <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/topbar.css') }}">
+
+
+</head>
+
+<body>
+
+    {% include "includes/topbar.html" %}
+    {% include "includes/sidebar.html" %}
+
+
+<div class="main">
+
+    <h1>
+        <i class="fa-solid fa-robot"></i>
+        AI Analyzer
+    </h1>
+
+    <p class="subtitle">
+        Analyze Files, Code and Complete Projects using AI.
+    </p>
+
+    <div class="cards">
+
+        <a href="/analyze-file" class="card">
+
+            <i class="fa-solid fa-file-lines"></i>
+
+            <h2>Analyze File</h2>
+
+            <p>
+                Upload any document and get AI insights.
+            </p>
+
+        </a>
+
+        <a href="/analyze-code" class="card">
+
+            <i class="fa-solid fa-code"></i>
+
+            <h2>Analyze Code</h2>
+
+            <p>
+                Find bugs, optimize and improve your code.
+            </p>
+
+        </a>
+
+        <a href="/analyze-project" class="card">
+
+            <i class="fa-solid fa-folder-tree"></i>
+
+            <h2>Analyze Project</h2>
+
+            <p>Analyze complete project structure with AI. </p>
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

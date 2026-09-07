@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="vieweport" content="width=device-width,intial=scale=1.0">
+    <title>Zyntra</title>
+</head>
+<body>
+    <nav class="navbar">
+<div class="logo">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Zyntra Logo">
+
+   
+</div>
+
+
+    <ul>
+
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/login">Login</a></li>
+
+        <li><a href="/signup">Signup</a></li>
+
+    </ul>
+
+</nav>
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h1>Welcome to Zyntra</h1>
+
+        <p>AI Powered Smart Workspace</p>
+
+        <button class="btn" onclick="window.location.href='/login'">
+    Get Started
+</button>
+
+    </div>
+
+<div class="glass-card">
+
+    <h2>🚀 Zyntra AI</h2>
+
+    <p>📝 Smart Notes</p>
+
+    <p>✅ Task Manager</p>
+
+    <p>🤖 AI Assistant</p>
+
+    <p>☁️ Cloud Workspace</p>
+
+</div>
+
+</section>
+</body>
+</html>

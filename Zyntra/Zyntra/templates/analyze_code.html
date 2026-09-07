@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zyntra AI Code Analyzer</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/analyze_code.css') }}">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/topbar.css') }}">
+
+
+</head>
+
+<body>
+
+    {% include "includes/topbar.html" %}
+
+<div class="container">
+
+    <a href="/ai-analyzer" class="back-link">
+    <i class="fa-solid fa-arrow-left"></i>
+    AI Analyzer
+</a>
+
+<h1>
+    <i class="fa-solid fa-code"></i>
+    Zyntra AI Code Analyzer
+</h1>
+
+<form method="POST">
+
+    <div class="upload-box">
+
+        <textarea
+            name="code"
+            placeholder="Paste Python, Java, C, C++, HTML, CSS, JavaScript or any programming language..."
+            required>{{ code }}</textarea>
+
+    </div>
+
+    <button id="analyzeBtn" type="submit">
+
+    <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+    Analyze Code
+
+</button>
+
+</form>
+
+{% if result %}
+
+<div class="chat-container">
+
+    <div class="ai-message">
+
+        <h3>
+            <i class="fa-solid fa-robot"></i>
+            Zyntra AI
+        </h3>
+
+        <pre id="resultBox">{{ result }}</pre>
+
+        <div class="btn-area">
+
+            <button
+                class="copy-btn"
+                type="button"
+                onclick="copyResult()">
+
+                <i class="fa-solid fa-copy"></i>
+
+                Copy Result
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+
+</form>
+
+</div>
+
+<script>
+
+document.querySelector("form").onsubmit = function(){
+
+    const btn = document.getElementById("analyzeBtn");
+
+    btn.innerHTML =
+    "<i class='fa-solid fa-spinner fa-spin'></i> AI is Thinking...";
+
+    btn.disabled = true;
+
+}
+
+function copyCode(){
+
+    const code = document.getElementById("resultBox").innerText;
+
+    navigator.clipboard.writeText(code);
+
+    alert("Result Copied Successfully!");
+
+}
+
+</script>
+
+</body>
+
+</html>

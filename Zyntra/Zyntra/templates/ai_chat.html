@@ -1,0 +1,2614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Zyntra AI Chat</title>
+
+
+    <!-- AI CHAT CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/ai_chat.css') }}">
+
+
+    <!-- FONT AWESOME -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+
+
+    <!-- MAIN SIDEBAR CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+
+    <!-- TOPBAR CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/topbar.css') }}">
+
+</head>
+
+
+<body
+    data-ai-chat-url="{{ url_for('ai_chat') }}"
+    data-current-chat-id="{{ current_chat._id if current_chat else '' }}">
+
+
+<!-- =====================================================
+     MAIN SIDEBAR
+===================================================== -->
+
+{% include "includes/sidebar.html" %}
+
+
+<!-- =====================================================
+     TOPBAR
+===================================================== -->
+
+{% include "includes/topbar.html" %}
+
+
+
+<!-- =====================================================
+     AI CHAT HISTORY SIDEBAR
+===================================================== -->
+
+<aside
+    class="chat-history"
+    id="chatHistory">
+
+
+    <!-- MOBILE CLOSE -->
+
+    <button
+        class="mobile-history-close"
+        type="button"
+        onclick="closeMobileHistory()"
+        aria-label="Close chat history">
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+
+    <!-- CHAT TITLE -->
+
+    <div class="chat-history-title">
+
+        <i class="fa-solid fa-robot"></i>
+
+        <span>Zyntra AI</span>
+
+    </div>
+
+
+    <!-- NEW CHAT -->
+
+    <button
+        class="new-chat"
+        type="button"
+        onclick="newChat()">
+
+        <i class="fa-solid fa-plus"></i>
+
+        <span>New Chat</span>
+
+    </button>
+
+
+
+    <!-- =================================================
+         PINNED
+    ================================================== -->
+
+    {% if pinned_chats %}
+
+    <div class="history-group">
+
+        <div class="history-heading">
+            PINNED
+        </div>
+
+
+        <div id="pinnedChats">
+
+            {% for chat in pinned_chats %}
+
+            <div
+                class="history-item {% if current_chat and current_chat._id == chat._id %}active{% endif %}"
+                data-chat-id="{{ chat._id }}"
+                data-pinned="true"
+                data-archived="false">
+
+
+                <button
+                    class="history-open"
+                    type="button"
+                    onclick="openChat('{{ chat._id }}')">
+
+                    <i class="fa-regular fa-message"></i>
+
+                    <span class="chat-title-text">
+                        {{ chat.title }}
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="more-button"
+                    type="button"
+                    onclick="openChatMenu(event, '{{ chat._id }}', false)"
+                    aria-label="Chat options">
+
+                    <i class="fa-solid fa-ellipsis"></i>
+
+                </button>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- =================================================
+         RECENT
+    ================================================== -->
+
+    {% if recent_chats %}
+
+    <div class="history-group">
+
+        <div class="history-heading">
+            RECENT
+        </div>
+
+
+        <div id="recentChats">
+
+            {% for chat in recent_chats %}
+
+            <div
+                class="history-item {% if current_chat and current_chat._id == chat._id %}active{% endif %}"
+                data-chat-id="{{ chat._id }}"
+                data-pinned="false"
+                data-archived="false">
+
+
+                <button
+                    class="history-open"
+                    type="button"
+                    onclick="openChat('{{ chat._id }}')">
+
+                    <i class="fa-regular fa-message"></i>
+
+                    <span class="chat-title-text">
+                        {{ chat.title }}
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="more-button"
+                    type="button"
+                    onclick="openChatMenu(event, '{{ chat._id }}', false)"
+                    aria-label="Chat options">
+
+                    <i class="fa-solid fa-ellipsis"></i>
+
+                </button>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- =================================================
+         ARCHIVED
+    ================================================== -->
+
+    {% if archived_chats %}
+
+    <div class="history-group">
+
+        <div class="history-heading">
+            ARCHIVED
+        </div>
+
+
+        <div id="archivedChats">
+
+            {% for chat in archived_chats %}
+
+            <div
+                class="history-item {% if current_chat and current_chat._id == chat._id %}active{% endif %}"
+                data-chat-id="{{ chat._id }}"
+                data-pinned="false"
+                data-archived="true">
+
+
+                <button
+                    class="history-open"
+                    type="button"
+                    onclick="openChat('{{ chat._id }}')">
+
+                    <i class="fa-solid fa-box-archive"></i>
+
+                    <span class="chat-title-text">
+                        {{ chat.title }}
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="more-button"
+                    type="button"
+                    onclick="openChatMenu(event, '{{ chat._id }}', true)"
+                    aria-label="Chat options">
+
+                    <i class="fa-solid fa-ellipsis"></i>
+
+                </button>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- =================================================
+         NO CHAT
+    ================================================== -->
+
+    {% if not pinned_chats and not recent_chats and not archived_chats %}
+
+    <div class="no-history">
+
+        <i class="fa-regular fa-message"></i>
+
+        <span>No chats yet</span>
+
+    </div>
+
+    {% endif %}
+
+
+</aside>
+
+
+
+<!-- =====================================================
+     MOBILE OVERLAY
+===================================================== -->
+
+<div
+    class="history-overlay"
+    id="historyOverlay"
+    onclick="closeMobileHistory()">
+</div>
+
+
+
+<!-- =====================================================
+     MAIN CHAT
+===================================================== -->
+
+<main class="chat-main">
+
+
+    <div class="chat-wrapper">
+
+
+        <!-- =================================================
+             CHAT HEADER
+        ================================================== -->
+
+        <header class="chat-header">
+
+
+            <div class="chat-header-left">
+
+
+                <!-- MOBILE HISTORY -->
+
+                <button
+                    class="mobile-history-btn"
+                    type="button"
+                    onclick="openMobileHistory()"
+                    aria-label="Open chat history"
+                    title="Chat history">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <!-- AI ICON -->
+
+                <div class="chat-ai-icon">
+
+                    <i class="fa-solid fa-robot"></i>
+
+                </div>
+
+
+                <!-- CHAT TITLE -->
+
+                <div class="chat-header-title">
+
+                    {% if current_chat %}
+
+                        {{ current_chat.title }}
+
+                    {% else %}
+
+                        Zyntra AI
+
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- SHARE -->
+
+            {% if current_chat %}
+
+            <div class="chat-header-actions">
+
+                <button
+                    class="header-share-button"
+                    type="button"
+                    onclick="shareChat()"
+                    title="Share chat"
+                    aria-label="Share chat">
+
+                    <i class="fa-solid fa-share-nodes"></i>
+
+                </button>
+
+            </div>
+
+            {% endif %}
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             MESSAGES
+        ================================================== -->
+
+        <section
+            class="messages"
+            id="messages">
+
+
+            {% if current_chat and current_chat.messages %}
+
+
+                {% for msg in current_chat.messages %}
+
+
+                <!-- USER -->
+
+                <div class="message user-message">
+
+
+                    <div class="message-icon">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+
+                    <div class="message-content">
+
+                        <div class="message-text">
+
+                            {{ msg.question }}
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- AI -->
+
+                <div class="message ai-message">
+
+
+                    <div class="message-icon">
+
+                        <i class="fa-solid fa-robot"></i>
+
+                    </div>
+
+
+                    <div class="message-content">
+
+
+                        <div class="ai-message-top">
+
+
+                            <span>
+                                Zyntra AI
+                            </span>
+
+
+                            <button
+                                type="button"
+                                onclick="copyText(this)"
+                                aria-label="Copy AI answer">
+
+                                <i class="fa-solid fa-copy"></i>
+
+                                <span>Copy</span>
+
+                            </button>
+
+
+                        </div>
+
+
+                        <pre>{{ msg.answer }}</pre>
+
+
+                    </div>
+
+
+                </div>
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <!-- EMPTY CHAT -->
+
+                <div class="empty-chat">
+
+
+                    <div class="empty-ai-icon">
+
+                        <i class="fa-solid fa-robot"></i>
+
+                    </div>
+
+
+                    <h2>
+                        How can I help you today?
+                    </h2>
+
+
+                    <p>
+                        Ask Zyntra AI anything.
+                    </p>
+
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             COMPOSER
+        ================================================== -->
+
+        <div class="composer">
+
+
+            <form
+                method="POST"
+                action="{{ url_for('ai_chat') }}"
+                id="chatForm">
+
+
+                {% if current_chat %}
+
+                <input
+                    type="hidden"
+                    name="chat_id"
+                    value="{{ current_chat._id }}">
+
+                {% endif %}
+
+
+                <textarea
+                    name="question"
+                    id="question"
+                    placeholder="Message Zyntra AI..."
+                    required
+                    autocomplete="off"></textarea>
+
+
+                <button
+                    type="submit"
+                    class="send-button"
+                    title="Send"
+                    aria-label="Send message">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                </button>
+
+
+            </form>
+
+
+            <div class="composer-note">
+
+                Zyntra AI can make mistakes.
+                Check important information.
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     CHAT MENU
+===================================================== -->
+
+<div
+    class="chat-menu"
+    id="chatMenu">
+
+
+    <!-- PIN -->
+
+    <button
+        type="button"
+        onclick="pinChat()">
+
+        <i class="fa-solid fa-thumbtack"></i>
+
+        <span id="pinText">
+            Pin chat
+        </span>
+
+    </button>
+
+
+    <!-- RENAME -->
+
+    <button
+        type="button"
+        onclick="openRenameModal()">
+
+        <i class="fa-solid fa-pen"></i>
+
+        <span>Rename</span>
+
+    </button>
+
+
+    <!-- SHARE -->
+
+    <button
+        type="button"
+        onclick="shareChat()">
+
+        <i class="fa-solid fa-share-nodes"></i>
+
+        <span>Share</span>
+
+    </button>
+
+
+    <!-- ARCHIVE -->
+
+    <button
+        type="button"
+        onclick="archiveChat()">
+
+        <i class="fa-solid fa-box-archive"></i>
+
+        <span id="archiveText">
+            Archive
+        </span>
+
+    </button>
+
+
+    <!-- DELETE -->
+
+    <button
+        type="button"
+        class="danger"
+        onclick="deleteChat()">
+
+        <i class="fa-solid fa-trash"></i>
+
+        <span>Delete</span>
+
+    </button>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     RENAME MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="renameModal">
+
+
+    <div
+        class="rename-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="renameModalTitle">
+
+
+        <!-- HEADER -->
+
+        <div class="modal-header">
+
+
+            <div>
+
+                <i class="fa-solid fa-pen"></i>
+
+                <span id="renameModalTitle">
+                    Rename Chat
+                </span>
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="closeRenameModal()"
+                aria-label="Close">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- BODY -->
+
+        <div class="modal-body">
+
+
+            <label for="renameInput">
+                Chat name
+            </label>
+
+
+            <input
+                type="text"
+                id="renameInput"
+                maxlength="80"
+                autocomplete="off"
+                placeholder="Enter chat name">
+
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+
+        <div class="modal-footer">
+
+
+            <button
+                type="button"
+                class="modal-cancel"
+                onclick="closeRenameModal()">
+
+                Cancel
+
+            </button>
+
+
+            <button
+                type="button"
+                class="modal-save"
+                onclick="saveRename()">
+
+                Save
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+
+<!-- =====================================================
+     DELETE CONFIRMATION MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay delete-modal-overlay"
+    id="deleteModal"
+    aria-hidden="true">
+
+    <div
+        class="delete-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="deleteModalTitle">
+
+        <div class="delete-modal-icon">
+            <i class="fa-solid fa-trash"></i>
+        </div>
+
+        <div class="delete-modal-content">
+            <h3 id="deleteModalTitle">Delete chat?</h3>
+
+            <p>
+                Are you sure you want to delete
+                <strong id="deleteChatName">this chat</strong>?
+            </p>
+
+            <span class="delete-modal-warning">
+                This action cannot be undone.
+            </span>
+        </div>
+
+        <div class="delete-modal-actions">
+
+            <button
+                type="button"
+                class="delete-cancel-button"
+                onclick="closeDeleteModal()">
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                class="delete-confirm-button"
+                onclick="confirmDeleteChat()">
+                <i class="fa-solid fa-trash"></i>
+                <span>Delete</span>
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   GLOBAL DATA
+===================================================== */
+
+const pageBody =
+    document.body;
+
+
+const aiChatUrl =
+    pageBody.dataset.aiChatUrl;
+
+
+let selectedChatId = null;
+
+let selectedChatPinned = false;
+
+let selectedChatArchived = false;
+
+
+
+
+/* =====================================================
+   NEW CHAT
+   ===================================================== */
+
+let openingNewChat = false;
+
+function newChat() {
+
+    if (openingNewChat) {
+        return;
+    }
+
+    openingNewChat = true;
+
+    closeMobileHistory();
+
+    window.location.href =
+        "{{ url_for('ai_chat') }}";
+
+}
+
+
+
+/* =====================================================
+   OPEN CHAT
+===================================================== */
+
+function openChat(chatId) {
+
+    if (!chatId) return;
+
+
+    window.location.href =
+        aiChatUrl +
+        "?chat_id=" +
+        encodeURIComponent(chatId);
+
+}
+
+
+
+/* =====================================================
+   MOBILE HISTORY OPEN
+===================================================== */
+
+function openMobileHistory() {
+
+    const history =
+        document.getElementById("chatHistory");
+
+
+    const overlay =
+        document.getElementById("historyOverlay");
+
+
+    if (!history) return;
+
+
+    history.classList.add("show");
+
+
+    if (overlay) {
+
+        overlay.classList.add("show");
+
+    }
+
+
+    document.body.classList.add(
+        "history-open"
+    );
+
+}
+
+
+
+/* =====================================================
+   MOBILE HISTORY CLOSE
+===================================================== */
+
+function closeMobileHistory() {
+
+    const history =
+        document.getElementById("chatHistory");
+
+
+    const overlay =
+        document.getElementById("historyOverlay");
+
+
+    if (history) {
+
+        history.classList.remove("show");
+
+    }
+
+
+    if (overlay) {
+
+        overlay.classList.remove("show");
+
+    }
+
+
+    document.body.classList.remove(
+        "history-open"
+    );
+
+}
+
+
+
+/* =====================================================
+   CHAT MENU
+===================================================== */
+
+function openChatMenu(
+    event,
+    chatId,
+    archived = false
+) {
+
+    event.preventDefault();
+
+    event.stopPropagation();
+
+
+    selectedChatId = chatId;
+
+    selectedChatArchived = archived;
+
+
+    const item =
+        event.currentTarget.closest(
+            ".history-item"
+        );
+
+
+    selectedChatPinned =
+        item
+            ? item.dataset.pinned === "true"
+            : false;
+
+
+    const menu =
+        document.getElementById(
+            "chatMenu"
+        );
+
+
+    if (!menu) return;
+
+
+    const pinText =
+        document.getElementById(
+            "pinText"
+        );
+
+
+    const archiveText =
+        document.getElementById(
+            "archiveText"
+        );
+
+
+    if (pinText) {
+
+        pinText.textContent =
+            selectedChatPinned
+                ? "Unpin chat"
+                : "Pin chat";
+
+    }
+
+
+    if (archiveText) {
+
+        archiveText.textContent =
+            selectedChatArchived
+                ? "Unarchive"
+                : "Archive";
+
+    }
+
+
+    menu.style.display = "flex";
+
+
+    let left =
+        event.clientX;
+
+
+    let top =
+        event.clientY;
+
+
+    const menuWidth = 200;
+
+    const menuHeight = 230;
+
+    const gap = 10;
+
+
+    if (
+        left + menuWidth >
+        window.innerWidth
+    ) {
+
+        left =
+            window.innerWidth -
+            menuWidth -
+            gap;
+
+    }
+
+
+    if (
+        top + menuHeight >
+        window.innerHeight
+    ) {
+
+        top =
+            window.innerHeight -
+            menuHeight -
+            gap;
+
+    }
+
+
+    menu.style.left =
+        Math.max(left, gap) +
+        "px";
+
+
+    menu.style.top =
+        Math.max(top, gap) +
+        "px";
+
+}
+
+
+
+/* =====================================================
+   CLOSE CHAT MENU
+===================================================== */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const menu =
+            document.getElementById(
+                "chatMenu"
+            );
+
+
+        if (!menu) return;
+
+
+        if (
+            !menu.contains(event.target) &&
+            !event.target.closest(
+                ".more-button"
+            )
+        ) {
+
+            menu.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   API HELPER
+===================================================== */
+
+async function sendChatAction(
+    url,
+    options = {}
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                url,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    ...options
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                "Something went wrong"
+            );
+
+        }
+
+
+        return data;
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        showToast(
+            error.message ||
+            "Something went wrong",
+            true
+        );
+
+
+        return null;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   PIN / UNPIN
+===================================================== */
+
+async function pinChat() {
+
+    if (!selectedChatId) return;
+
+
+    const data =
+        await sendChatAction(
+            `/ai-chat/pin/${selectedChatId}`
+        );
+
+
+    if (!data) return;
+
+
+    closeChatMenu();
+
+
+    window.location.reload();
+
+}
+
+
+
+/* =====================================================
+   CLOSE CHAT MENU
+===================================================== */
+
+function closeChatMenu() {
+
+    const menu =
+        document.getElementById(
+            "chatMenu"
+        );
+
+
+    if (menu) {
+
+        menu.style.display =
+            "none";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   RENAME MODAL OPEN
+===================================================== */
+
+function openRenameModal() {
+
+    if (!selectedChatId) return;
+
+
+    const item =
+        document.querySelector(
+            `[data-chat-id="${selectedChatId}"]`
+        );
+
+
+    if (!item) return;
+
+
+    const title =
+        item.querySelector(
+            ".chat-title-text"
+        );
+
+
+    if (!title) return;
+
+
+    const input =
+        document.getElementById(
+            "renameInput"
+        );
+
+
+    const modal =
+        document.getElementById(
+            "renameModal"
+        );
+
+
+    if (!input || !modal) return;
+
+
+    input.value =
+        title.textContent.trim();
+
+
+    closeChatMenu();
+
+
+    modal.classList.add("show");
+
+
+    setTimeout(
+        function() {
+
+            input.focus();
+
+            input.select();
+
+        },
+        100
+    );
+
+}
+
+
+
+/* =====================================================
+   CLOSE RENAME MODAL
+===================================================== */
+
+function closeRenameModal() {
+
+    const modal =
+        document.getElementById(
+            "renameModal"
+        );
+
+
+    if (modal) {
+
+        modal.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SAVE RENAME
+===================================================== */
+
+async function saveRename() {
+
+    if (!selectedChatId) return;
+
+
+    const input =
+        document.getElementById(
+            "renameInput"
+        );
+
+
+    if (!input) return;
+
+
+    const newTitle =
+        input.value.trim();
+
+
+    if (!newTitle) {
+
+        showToast(
+            "Chat name cannot be empty",
+            true
+        );
+
+        input.focus();
+
+        return;
+
+    }
+
+
+    const item =
+        document.querySelector(
+            `[data-chat-id="${selectedChatId}"]`
+        );
+
+
+    if (!item) return;
+
+
+    const title =
+        item.querySelector(
+            ".chat-title-text"
+        );
+
+
+    if (!title) return;
+
+
+    const oldTitle =
+        title.textContent.trim();
+
+
+    if (newTitle === oldTitle) {
+
+        closeRenameModal();
+
+        return;
+
+    }
+
+
+    const data =
+        await sendChatAction(
+            `/ai-chat/rename/${selectedChatId}`,
+            {
+                body: JSON.stringify({
+                    title: newTitle
+                })
+            }
+        );
+
+
+    if (!data) return;
+
+
+    title.textContent =
+        newTitle;
+
+
+    closeRenameModal();
+
+
+    const currentChatId =
+        pageBody.dataset.currentChatId;
+
+
+    if (
+        String(selectedChatId) ===
+        String(currentChatId)
+    ) {
+
+        window.location.reload();
+
+        return;
+
+    }
+
+
+    showToast(
+        "Chat renamed successfully"
+    );
+
+}
+
+
+
+/* =====================================================
+   ENTER SAVE RENAME
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        const modal =
+            document.getElementById(
+                "renameModal"
+            );
+
+
+        if (
+            event.key === "Escape" &&
+            modal &&
+            modal.classList.contains("show")
+        ) {
+
+            closeRenameModal();
+
+        }
+
+
+        if (
+            event.key === "Enter" &&
+            modal &&
+            modal.classList.contains("show") &&
+            document.activeElement.id ===
+            "renameInput"
+        ) {
+
+            event.preventDefault();
+
+            saveRename();
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   CLICK OUTSIDE RENAME MODAL
+===================================================== */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const modal =
+            document.getElementById(
+                "renameModal"
+            );
+
+
+        if (!modal) return;
+
+
+        if (
+            event.target === modal
+        ) {
+
+            closeRenameModal();
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   ARCHIVE / UNARCHIVE
+===================================================== */
+
+async function archiveChat() {
+
+    if (!selectedChatId) return;
+
+
+    let url;
+
+
+    if (selectedChatArchived) {
+
+        url =
+            `/ai-chat/unarchive/${selectedChatId}`;
+
+    }
+
+    else {
+
+        url =
+            `/ai-chat/archive/${selectedChatId}`;
+
+    }
+
+
+    const data =
+        await sendChatAction(url);
+
+
+    if (!data) return;
+
+
+    closeChatMenu();
+
+
+    window.location.reload();
+
+}
+
+
+
+/* =====================================================
+   DELETE
+===================================================== */
+
+function deleteChat() {
+
+    if (!selectedChatId) return;
+
+    const modal =
+        document.getElementById("deleteModal");
+
+    const name =
+        document.getElementById("deleteChatName");
+
+    const item =
+        document.querySelector(
+            `[data-chat-id="${selectedChatId}"]`
+        );
+
+    const title =
+        item
+            ? item.querySelector(".chat-title-text")
+            : null;
+
+    if (name) {
+        name.textContent =
+            title
+                ? title.textContent.trim()
+                : "this chat";
+    }
+
+    closeChatMenu();
+
+    if (modal) {
+        modal.classList.add("show");
+    }
+
+}
+
+
+function closeDeleteModal() {
+
+    const modal =
+        document.getElementById("deleteModal");
+
+    if (modal) {
+        modal.classList.remove("show");
+    }
+
+}
+
+
+async function confirmDeleteChat() {
+
+    if (!selectedChatId) {
+        closeDeleteModal();
+        return;
+    }
+
+    const deleteButton =
+        document.querySelector(
+            ".delete-confirm-button"
+        );
+
+    if (deleteButton) {
+        deleteButton.disabled = true;
+        deleteButton.classList.add("loading");
+
+        const originalHTML =
+            deleteButton.innerHTML;
+
+        deleteButton.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i><span>Deleting...</span>';
+
+        const data =
+            await sendChatAction(
+                `/ai-chat/delete/${selectedChatId}`
+            );
+
+        if (deleteButton) {
+            deleteButton.disabled = false;
+            deleteButton.classList.remove("loading");
+            deleteButton.innerHTML = originalHTML;
+        }
+
+        if (!data) return;
+
+        closeDeleteModal();
+
+        window.location.href =
+            aiChatUrl;
+
+        return;
+    }
+
+    const data =
+        await sendChatAction(
+            `/ai-chat/delete/${selectedChatId}`
+        );
+
+    if (!data) return;
+
+    closeDeleteModal();
+
+    window.location.href =
+        aiChatUrl;
+
+}
+
+
+
+/* =====================================================
+   SHARE CHAT
+===================================================== */
+
+async function shareChat() {
+
+    if (!selectedChatId) {
+
+        selectedChatId =
+            pageBody.dataset.currentChatId;
+
+    }
+
+
+    if (!selectedChatId) {
+
+        showToast(
+            "Open a chat first",
+            true
+        );
+
+        return;
+
+    }
+
+
+    const shareUrl =
+        window.location.origin +
+        aiChatUrl +
+        "?chat_id=" +
+        encodeURIComponent(
+            selectedChatId
+        );
+
+
+    try {
+
+        if (
+            navigator.clipboard &&
+            window.isSecureContext
+        ) {
+            await navigator.clipboard.writeText(
+                shareUrl
+            );
+        } else {
+            throw new Error("Clipboard API unavailable");
+        }
+
+
+        closeChatMenu();
+
+
+        showToast(
+            "Chat link copied"
+        );
+
+    }
+
+    catch (error) {
+
+        const temp =
+            document.createElement(
+                "textarea"
+            );
+
+
+        temp.value =
+            shareUrl;
+
+
+        document.body.appendChild(
+            temp
+        );
+
+
+        temp.select();
+
+
+        document.execCommand(
+            "copy"
+        );
+
+
+        temp.remove();
+
+
+        showToast(
+            "Chat link copied"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   COPY AI ANSWER
+===================================================== */
+
+async function copyText(button) {
+
+    const message =
+        button
+            .closest(".ai-message")
+            .querySelector("pre");
+
+
+    if (!message) return;
+
+
+    try {
+
+        await navigator.clipboard.writeText(
+            message.innerText
+        );
+
+
+        const oldHTML =
+            button.innerHTML;
+
+
+        button.innerHTML =
+            '<i class="fa-solid fa-check"></i><span>Copied</span>';
+
+
+        setTimeout(
+            function() {
+
+                button.innerHTML =
+                    oldHTML;
+
+            },
+            1500
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+
+
+
+/* =====================================================
+   DELETE MODAL KEYBOARD / OUTSIDE CLICK
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        const modal =
+            document.getElementById(
+                "deleteModal"
+            );
+
+        if (
+            event.key === "Escape" &&
+            modal &&
+            modal.classList.contains("show")
+        ) {
+            closeDeleteModal();
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const modal =
+            document.getElementById(
+                "deleteModal"
+            );
+
+        if (
+            modal &&
+            event.target === modal
+        ) {
+            closeDeleteModal();
+        }
+
+    }
+);
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(
+    message,
+    error = false
+) {
+
+    const oldToast =
+        document.querySelector(
+            ".chat-toast"
+        );
+
+
+    if (oldToast) {
+
+        oldToast.remove();
+
+    }
+
+
+    const toast =
+        document.createElement(
+            "div"
+        );
+
+
+    toast.className =
+        "chat-toast";
+
+
+    if (error) {
+
+        toast.classList.add(
+            "error"
+        );
+
+    }
+
+
+    toast.innerHTML =
+        `
+        <i class="fa-solid ${
+            error
+                ? "fa-circle-exclamation"
+                : "fa-check"
+        }"></i>
+
+        <span>${message}</span>
+        `;
+
+
+    document.body.appendChild(
+        toast
+    );
+
+
+    setTimeout(
+        function() {
+
+            toast.classList.add(
+                "show"
+            );
+
+        },
+        10
+    );
+
+
+    setTimeout(
+        function() {
+
+            toast.classList.remove(
+                "show"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    toast.remove();
+
+                },
+                250
+            );
+
+        },
+        2200
+    );
+
+}
+
+
+
+/* =====================================================
+   TEXTAREA AUTO RESIZE
+===================================================== */
+
+const textarea =
+    document.getElementById(
+        "question"
+    );
+
+
+if (textarea) {
+
+    textarea.addEventListener(
+        "input",
+        function() {
+
+            this.style.height =
+                "auto";
+
+
+            this.style.height =
+                Math.min(
+                    this.scrollHeight,
+                    180
+                ) + "px";
+
+        }
+    );
+
+}
+
+
+
+(function () {
+
+    const form = document.getElementById("chatForm");
+    const textarea = document.getElementById("question");
+    const sendButton = document.querySelector(".send-button");
+
+    if (!form || !textarea) {
+        return;
+    }
+
+    let isSubmitting = false;
+
+    /* ENTER = SEND
+       SHIFT + ENTER = NEW LINE */
+
+    textarea.addEventListener("keydown", function (event) {
+
+        if (event.key === "Enter" && !event.shiftKey) {
+
+            event.preventDefault();
+
+            if (isSubmitting) {
+                return;
+            }
+
+            form.requestSubmit();
+        }
+
+    });
+
+
+    /* FORM SUBMIT */
+
+    form.addEventListener("submit", function (event) {
+
+        if (isSubmitting) {
+            event.preventDefault();
+            return;
+        }
+
+        const question = textarea.value.trim();
+
+        if (!question) {
+            event.preventDefault();
+            return;
+        }
+
+        isSubmitting = true;
+
+        /*
+         * IMPORTANT:
+         * disabled નહીં કરવું.
+         * readOnly રાખવાથી value POST થશે.
+         */
+
+        textarea.readOnly = true;
+
+        if (sendButton) {
+
+            sendButton.disabled = true;
+
+            sendButton.style.opacity = "0.65";
+            sendButton.style.pointerEvents = "none";
+
+            sendButton.innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i>';
+        }
+
+    });
+
+})();
+
+/* =====================================================
+   AUTO SCROLL
+===================================================== */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        const messages =
+            document.getElementById(
+                "messages"
+            );
+
+
+        if (messages) {
+
+            messages.scrollTop =
+                messages.scrollHeight;
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   CLOSE MOBILE HISTORY AFTER CHAT OPEN
+===================================================== */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target.closest(
+                ".history-open"
+            )
+        ) {
+
+            closeMobileHistory();
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   ESCAPE CLOSE MOBILE HISTORY
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeMobileHistory();
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   ZYNTRA DUAL MOBILE SIDEBAR FIX
+   ========================================================= */
+
+(function () {
+
+    "use strict";
+
+
+    /* =====================================================
+       MAIN SIDEBAR SELECTORS
+    ===================================================== */
+
+    const MAIN_SIDEBAR_SELECTORS = [
+        ".sidebar",
+        ".main-sidebar",
+        ".app-sidebar",
+        ".sidebar-container",
+        "#sidebar",
+        "#mainSidebar"
+    ];
+
+
+    const MAIN_TOGGLE_SELECTORS = [
+        ".sidebar-toggle",
+        "#sidebarToggle",
+        ".menu-toggle",
+        ".mobile-menu-toggle",
+        "[data-sidebar-toggle]"
+    ];
+
+
+    let mainSidebarOverlay = null;
+
+
+    /* =====================================================
+       FIND MAIN SIDEBAR
+    ===================================================== */
+
+    function getMainSidebar() {
+
+        for (
+            const selector
+            of MAIN_SIDEBAR_SELECTORS
+        ) {
+
+            const element =
+                document.querySelector(selector);
+
+            if (element) {
+                return element;
+            }
+        }
+
+        return null;
+    }
+
+
+    /* =====================================================
+       CREATE MAIN SIDEBAR OVERLAY
+    ===================================================== */
+
+    function createMainSidebarOverlay() {
+
+        if (
+            document.getElementById(
+                "zyntraMainSidebarOverlay"
+            )
+        ) {
+
+            mainSidebarOverlay =
+                document.getElementById(
+                    "zyntraMainSidebarOverlay"
+                );
+
+            return;
+        }
+
+
+        mainSidebarOverlay =
+            document.createElement("div");
+
+        mainSidebarOverlay.id =
+            "zyntraMainSidebarOverlay";
+
+
+        mainSidebarOverlay.addEventListener(
+            "click",
+            closeMainSidebar
+        );
+
+
+        document.body.appendChild(
+            mainSidebarOverlay
+        );
+    }
+
+
+    /* =====================================================
+       OPEN MAIN SIDEBAR
+    ===================================================== */
+
+    function openMainSidebar() {
+
+        if (window.innerWidth > 768) {
+            return;
+        }
+
+
+        const sidebar =
+            getMainSidebar();
+
+
+        if (!sidebar) {
+            console.warn(
+                "Zyntra main sidebar not found."
+            );
+
+            return;
+        }
+
+
+        createMainSidebarOverlay();
+
+
+        /* Close AI history first */
+
+        if (
+            typeof closeMobileHistory ===
+            "function"
+        ) {
+
+            closeMobileHistory();
+        }
+
+
+        document.body.classList.add(
+            "zyntra-main-sidebar-open"
+        );
+    }
+
+
+    /* =====================================================
+       CLOSE MAIN SIDEBAR
+    ===================================================== */
+
+    function closeMainSidebar() {
+
+        document.body.classList.remove(
+            "zyntra-main-sidebar-open"
+        );
+    }
+
+
+    /* =====================================================
+       TOGGLE MAIN SIDEBAR
+    ===================================================== */
+
+    function toggleMainSidebar() {
+
+        if (
+            document.body.classList.contains(
+                "zyntra-main-sidebar-open"
+            )
+        ) {
+
+            closeMainSidebar();
+
+        } else {
+
+            openMainSidebar();
+        }
+    }
+
+
+    /* =====================================================
+       FIND MAIN SIDEBAR BUTTON
+    ===================================================== */
+
+    function findMainSidebarToggle() {
+
+        /* First try known classes */
+
+        for (
+            const selector
+            of MAIN_TOGGLE_SELECTORS
+        ) {
+
+            const button =
+                document.querySelector(selector);
+
+            if (button) {
+                return button;
+            }
+        }
+
+
+        /*
+         * If existing sidebar has no standard class,
+         * find hamburger inside TOPBAR.
+         */
+
+        const topbar =
+            document.querySelector(
+                ".topbar, #topbar, .navbar, header"
+            );
+
+
+        if (topbar) {
+
+            const buttons =
+                topbar.querySelectorAll(
+                    "button, a"
+                );
+
+
+            for (
+                const button
+                of buttons
+            ) {
+
+                if (
+                    button.closest(
+                        ".mobile-history-btn"
+                    )
+                ) {
+                    continue;
+                }
+
+
+                const icon =
+                    button.querySelector(
+                        ".fa-bars, .fa-bars-staggered"
+                    );
+
+
+                if (icon) {
+                    return button;
+                }
+            }
+        }
+
+
+        return null;
+    }
+
+
+    /* =====================================================
+       CONNECT MAIN SIDEBAR BUTTON
+    ===================================================== */
+
+    function connectMainSidebarButton() {
+
+        const button =
+            findMainSidebarToggle();
+
+
+        if (!button) {
+
+            console.warn(
+                "Zyntra main sidebar toggle not found."
+            );
+
+            return;
+        }
+
+
+        /*
+         * Prevent duplicate listeners.
+         */
+
+        if (
+            button.dataset.zyntraSidebarFixed
+            === "true"
+        ) {
+
+            return;
+        }
+
+
+        button.dataset.zyntraSidebarFixed =
+            "true";
+
+
+        button.addEventListener(
+            "click",
+            function (event) {
+
+                /*
+                 * We only take over on mobile.
+                 */
+
+                if (
+                    window.innerWidth <= 768
+                ) {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+                    event.stopImmediatePropagation();
+
+
+                    toggleMainSidebar();
+                }
+            },
+            true
+        );
+    }
+
+
+    /* =====================================================
+       AI HISTORY BUTTON
+       ===================================================== */
+
+    function connectAIHistoryButton() {
+
+        const button =
+            document.querySelector(
+                ".mobile-history-btn"
+            );
+
+
+        if (!button) {
+            return;
+        }
+
+
+        if (
+            button.dataset.zyntraHistoryFixed
+            === "true"
+        ) {
+
+            return;
+        }
+
+
+        button.dataset.zyntraHistoryFixed =
+            "true";
+
+
+        button.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+
+                if (
+                    typeof openMobileHistory
+                    === "function"
+                ) {
+
+                    openMobileHistory();
+                }
+
+            },
+            true
+        );
+    }
+
+
+    /* =====================================================
+       CLOSE MAIN SIDEBAR WITH ESC
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeMainSidebar();
+
+                if (
+                    typeof closeMobileHistory
+                    === "function"
+                ) {
+
+                    closeMobileHistory();
+                }
+            }
+        }
+    );
+
+
+    /* =====================================================
+       RESIZE
+    ===================================================== */
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+            if (
+                window.innerWidth > 768
+            ) {
+
+                closeMainSidebar();
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       INITIALIZE
+    ===================================================== */
+
+    function initDualSidebar() {
+
+        createMainSidebarOverlay();
+
+        connectMainSidebarButton();
+
+        connectAIHistoryButton();
+    }
+
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            initDualSidebar
+        );
+
+    } else {
+
+        initDualSidebar();
+    }
+
+
+    /*
+     * Expose functions globally.
+     */
+
+    window.openMainSidebar =
+        openMainSidebar;
+
+    window.closeMainSidebar =
+        closeMainSidebar;
+
+    window.toggleMainSidebar =
+        toggleMainSidebar;
+
+})();
+</script>
+
+</body>
+
+</html>

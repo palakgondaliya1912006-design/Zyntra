@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Task - Zyntra</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/tasks.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/topbar.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    
+    {% include "includes/topbar.html" %}
+
+
+    <main class="main edit-task-page">
+
+        <h1 class="page-title">
+
+            <i class="fa-solid fa-pen"></i>
+
+            Edit Task
+
+        </h1>
+
+
+        <div class="edit-task-card">
+
+            <form method="POST">
+
+
+                <label>Task</label>
+
+                <input
+                    type="text"
+                    name="task"
+                    value="{{ task.task }}"
+                    required>
+
+
+                <label>Status</label>
+
+                <select
+                    name="status"
+                    required>
+
+                    <option
+                        value="Pending"
+                        {% if task.status == "Pending" %}selected{% endif %}>
+
+                        Pending
+
+                    </option>
+
+
+                    <option
+                        value="In Progress"
+                        {% if task.status == "In Progress" %}selected{% endif %}>
+
+                        In Progress
+
+                    </option>
+
+
+                    <option
+                        value="Completed"
+                        {% if task.status == "Completed" %}selected{% endif %}>
+
+                        Completed
+
+                    </option>
+
+                </select>
+
+
+                <button type="submit">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Update Task
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <a href="/tasks" class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Tasks
+
+        </a>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile | Zyntra</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/profile.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/topbar.css') }}">
+
+
+
+</head>
+<body>
+        {% include "includes/sidebar.html" %}
+        {% include "includes/topbar.html" %}
+<div class="container">
+    <div class="profile-card">
+
+        <div class="profile-header">
+
+    <div class="profile-photo">
+
+        {% if user.profile_image %}
+
+            <img src="{{ url_for('static', filename='images/profiles/' + user.profile_image) }}"
+                 class="profile-img">
+
+        {% else %}
+
+            <img src="{{ url_for('static', filename='images/default.png') }}"
+                 class="profile-img">
+
+        {% endif %}
+
+        <button id="camera-btn" class="camera-btn">
+
+            <i class="fa-solid fa-camera"></i>
+
+        </button>
+
+    </div>
+
+    <h2>{{ user.fullname }}</h2>
+
+    <p class="email">{{ user.email if user.email else "Email Not Available" }}</p>
+
+</div>
+<div id="photo-menu" class="photo-menu">
+
+    <form action="/upload-profile-photo"
+          method="POST"
+          enctype="multipart/form-data">
+
+        <label for="profile-file">
+
+            <i class="fa-solid fa-upload"></i>
+
+            Upload Photo
+
+        </label>
+
+        <input
+            type="file"
+            id="profile-file"
+            name="profile"
+            hidden
+            onchange="this.form.submit()">
+
+    </form>
+
+    <a href="/remove-profile-photo">
+
+        <i class="fa-solid fa-trash"></i>
+
+        Remove Photo
+
+    </a>
+
+    <button id="close-menu">
+
+        Cancel
+
+    </button>
+
+</div>
+        <div class="profile-info">
+
+            <div class="info-box">
+
+                <i class="fa-solid fa-phone"></i>
+
+                <span>
+                    {{ user.phone if user.phone else "Not Added" }}
+                </span>
+
+            </div>
+
+            <div class="info-box">
+
+                <i class="fa-solid fa-user"></i>
+
+                <span>
+                    {{ user.bio if user.bio else "No Bio Added" }}
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <h3>{{ total_notes }}</h3>
+
+                <p>Notes</p>
+
+            </div>
+
+            <div class="stat">
+
+                <h3>{{ total_tasks }}</h3>
+
+                <p>Tasks</p>
+
+            </div>
+
+            <div class="stat">
+
+                <h3>{{ total_analysis }}</h3>
+
+                <p>AI Analysis</p>
+
+            </div>
+
+        </div>
+
+        <div class="buttons">
+
+            <a href="/edit-profile" class="btn">
+
+                <i class="fa-solid fa-user-pen"></i>
+
+                Edit Profile
+
+            </a>
+
+            <a href="/change-password" class="btn">
+
+                <i class="fa-solid fa-lock"></i>
+
+                Change Password
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+
+const camera=document.getElementById("camera-btn");
+
+const menu=document.getElementById("photo-menu");
+
+const close=document.getElementById("close-menu");
+
+camera.onclick=()=>{
+
+    menu.classList.add("active");
+
+}
+
+close.onclick=()=>{
+
+    menu.classList.remove("active");
+
+}
+
+</script>
+</body>
+</html>

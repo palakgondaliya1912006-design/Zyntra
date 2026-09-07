@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Edit Event</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/calendar.css') }}">
+
+<link rel="stylesheet"
+    href="{{ url_for('static', filename='css/topbar.css') }}">
+
+
+</head>
+
+<body>
+    {% include "includes/topbar.html" %}
+
+<div class="main">
+    
+
+<h1 class="page-title">
+Edit Event
+</h1>
+
+<div class="add-event">
+
+<form method="POST">
+
+<input
+type="text"
+name="title"
+value="{{ event.title }}"
+required>
+
+<textarea
+name="description">{{ event.description }}</textarea>
+
+<input
+type="date"
+name="date"
+value="{{ event.date }}"
+required>
+
+<input
+type="time"
+name="time"
+value="{{ event.time }}"
+required>
+
+<button type="submit">
+
+Update Event
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1092 @@
+/* =====================================================
+   ZYNTRA GLOBAL STYLE
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #1e3a8a,
+        #312e81
+    );
+
+    color: white;
+
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+    width: 100%;
+
+    min-height: 80px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 12px 50px;
+
+    background: rgba(15, 23, 42, 0.18);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+    position: relative;
+
+    z-index: 100;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    padding: 0;
+
+    margin: 0;
+}
+
+.logo img {
+    width: 190px;
+
+    height: auto;
+
+    display: block;
+
+    margin: 0;
+}
+
+
+/* =====================================================
+   NAV LINKS
+===================================================== */
+
+.navbar ul {
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+    list-style: none;
+
+    margin: 0;
+
+    padding: 0;
+}
+
+.navbar ul li {
+    margin: 0;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    transition: 0.3s ease;
+}
+
+.navbar ul li a:hover {
+    color: #facc15;
+}
+
+
+/* =====================================================
+   HOME / HERO
+===================================================== */
+
+.hero {
+    width: 100%;
+
+    min-height: calc(100vh - 80px);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 70px;
+
+    padding: 70px 8%;
+}
+
+
+.hero-text {
+    width: 50%;
+
+    text-align: left;
+}
+
+.hero h1 {
+    font-size: 55px;
+
+    line-height: 1.15;
+
+    color: #ffffff;
+
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 22px;
+
+    color: #f9f7f7;
+
+    margin-top: 10px;
+}
+
+
+/* =====================================================
+   GET STARTED BUTTON
+===================================================== */
+
+.btn {
+    margin-top: 30px;
+
+    padding: 15px 35px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #4f46e5;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+    box-shadow:
+        0 0 20px rgba(109, 93, 252, 0.5);
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.03);
+
+    background: #5b4cf0;
+
+    box-shadow:
+        0 0 40px rgba(109, 93, 252, 0.8);
+}
+
+
+/* =====================================================
+   HERO IMAGE
+===================================================== */
+
+.hero-image {
+    width: 50%;
+
+    text-align: center;
+}
+
+.hero-image img {
+    width: 100%;
+
+    max-width: 500px;
+
+    height: auto;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =====================================================
+   GLASS CARD
+===================================================== */
+
+.glass-card {
+    width: 420px;
+
+    min-height: 350px;
+
+    padding: 40px;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    border-radius: 25px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    color: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.3);
+
+    transition: 0.4s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-8px);
+}
+
+
+/* =====================================================
+   LOGIN / SIGNUP CONTAINER
+===================================================== */
+
+.login-container {
+
+    width: 100%;
+
+    min-height: calc(100vh - 80px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 60px;
+
+    padding: 50px 7%;
+}
+
+
+/* =====================================================
+   LOGIN LEFT
+===================================================== */
+
+.login-left {
+
+    width: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: white;
+}
+
+.login-left img {
+
+    width: 100%;
+
+    max-width: 480px;
+
+    height: auto;
+
+    display: block;
+}
+
+.login-left h1 {
+    font-size: 55px;
+}
+
+.login-left p {
+    font-size: 22px;
+
+    margin-top: 15px;
+}
+
+
+/* =====================================================
+   LOGIN RIGHT
+===================================================== */
+
+.login-right {
+
+    width: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.login-right form {
+
+    width: 100%;
+
+    max-width: 430px;
+
+    padding: 40px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+
+/* =====================================================
+   FORM TITLE
+===================================================== */
+
+.login-right h2 {
+
+    color: white;
+
+    text-align: center;
+
+    line-height: 1.5;
+
+    margin-bottom: 25px;
+
+    font-size: 25px;
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.login-right form > input {
+
+    width: 100%;
+
+    height: 55px;
+
+    padding: 0 15px;
+
+    margin-bottom: 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: white;
+
+    color: #111827;
+
+    font-size: 16px;
+}
+
+.login-right input::placeholder {
+    color: #6b7280;
+}
+
+
+/* =====================================================
+   PASSWORD
+===================================================== */
+
+.password-box {
+
+    position: relative;
+
+    width: 100%;
+
+    margin-bottom: 18px;
+}
+
+.password-box input {
+
+    width: 100%;
+
+    height: 55px;
+
+    padding: 0 50px 0 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: white;
+
+    color: #111827;
+
+    font-size: 16px;
+}
+
+.password-box i {
+
+    position: absolute;
+
+    right: 18px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    cursor: pointer;
+
+    color: #777;
+
+    font-size: 18px;
+
+    transition: 0.2s;
+}
+
+.password-box i:hover {
+    color: #4f46e5;
+}
+
+
+/* =====================================================
+   LOGIN BUTTON
+===================================================== */
+
+.login-right button {
+
+    width: 100%;
+
+    height: 55px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #4f46e5;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.login-right button:hover {
+
+    background: #5b4cf0;
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   OPTIONS
+===================================================== */
+
+.options {
+
+    width: 100%;
+
+    margin: 15px 0 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+.options label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: white;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+}
+
+.options input {
+
+    width: auto !important;
+
+    height: auto !important;
+
+    margin: 0 !important;
+}
+
+.options a {
+
+    color: #facc15;
+
+    text-decoration: none;
+
+    font-size: 14px;
+}
+
+.options a:hover {
+    text-decoration: underline;
+}
+
+
+/* =====================================================
+   FORM LINKS / TEXT
+===================================================== */
+
+.login-right p {
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: white;
+
+    line-height: 24px;
+}
+
+.login-right a {
+
+    color: #facc15;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.login-right a:hover {
+    text-decoration: underline;
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.error {
+
+    color: #ff4d4d;
+
+    text-align: center;
+
+    margin-bottom: 15px;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   MAIN - IF USED
+===================================================== */
+
+.main {
+
+    margin-left: 280px;
+
+    padding: 40px;
+
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .navbar {
+        padding: 12px 30px;
+    }
+
+    .logo img {
+        width: 170px;
+    }
+
+    .navbar ul {
+        gap: 20px;
+    }
+
+    .navbar ul li a {
+        font-size: 15px;
+    }
+
+
+    .hero {
+
+        gap: 35px;
+
+        padding: 60px 5%;
+    }
+
+    .hero h1 {
+        font-size: 45px;
+    }
+
+    .hero p {
+        font-size: 19px;
+    }
+
+    .glass-card {
+        width: 360px;
+
+        min-height: 320px;
+
+        padding: 30px;
+    }
+
+
+    .login-container {
+
+        gap: 35px;
+
+        padding: 40px 5%;
+    }
+
+    .login-right form {
+        padding: 30px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+
+    /* ================= NAVBAR ================= */
+
+    .navbar {
+
+        min-height: 70px;
+
+        padding: 10px 18px;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        gap: 10px;
+    }
+
+
+    .logo img {
+
+        width: 150px;
+    }
+
+
+    .navbar ul {
+
+        width: 100%;
+
+        justify-content: center;
+
+        gap: 20px;
+
+        flex-wrap: wrap;
+    }
+
+
+    .navbar ul li a {
+
+        font-size: 14px;
+    }
+
+
+    /* ================= HOME ================= */
+
+    .hero {
+
+        min-height: auto;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 40px;
+
+        padding: 55px 20px;
+    }
+
+
+    .hero-text {
+
+        width: 100%;
+
+        text-align: center;
+    }
+
+
+    .hero h1 {
+
+        font-size: 38px;
+
+        line-height: 1.2;
+    }
+
+
+    .hero p {
+
+        font-size: 18px;
+
+        line-height: 26px;
+    }
+
+
+    .btn {
+
+        width: 100%;
+
+        max-width: 280px;
+
+        padding: 14px 25px;
+
+        font-size: 17px;
+    }
+
+
+    .hero-image {
+
+        width: 100%;
+    }
+
+
+    .hero-image img {
+
+        max-width: 350px;
+    }
+
+
+    .glass-card {
+
+        width: 100%;
+
+        max-width: 360px;
+
+        min-height: 280px;
+
+        padding: 30px;
+
+        border-radius: 20px;
+    }
+
+
+    /* ================= LOGIN / SIGNUP ================= */
+
+    .login-container {
+
+        min-height: auto;
+
+        width: 100%;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 25px;
+
+        padding: 35px 15px 45px;
+    }
+
+
+    /* Image ABOVE form */
+
+    .login-left {
+
+        width: 100%;
+
+        order: 1;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+    }
+
+
+    .login-left img {
+
+        width: 100%;
+
+        max-width: 280px;
+
+        height: auto;
+    }
+
+
+    .login-right {
+
+        width: 100%;
+
+        order: 2;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+    }
+
+
+    .login-right form {
+
+        width: 100%;
+
+        max-width: 430px;
+
+        padding: 25px 20px;
+
+        border-radius: 18px;
+    }
+
+
+    .login-right h2 {
+
+        font-size: 22px;
+
+        line-height: 1.45;
+
+        margin-bottom: 20px;
+    }
+
+
+    .login-right form > input {
+
+        height: 52px;
+
+        font-size: 15px;
+
+        margin-bottom: 15px;
+    }
+
+
+    .password-box {
+
+        margin-bottom: 15px;
+    }
+
+
+    .password-box input {
+
+        height: 52px;
+
+        font-size: 15px;
+    }
+
+
+    .login-right button {
+
+        height: 52px;
+
+        font-size: 17px;
+    }
+
+
+    .options {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+
+        margin: 12px 0 20px;
+    }
+
+
+    .options label {
+
+        font-size: 13px;
+    }
+
+
+    .options a {
+
+        font-size: 13px;
+    }
+
+
+    .login-right p {
+
+        font-size: 14px;
+
+        line-height: 23px;
+    }
+
+
+    /* MAIN */
+
+    .main {
+
+        margin-left: 0;
+
+        padding: 20px 15px;
+
+        width: 100%;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+    .navbar {
+
+        padding: 10px 12px;
+
+        gap: 8px;
+    }
+
+
+    .logo img {
+
+        width: 135px;
+    }
+
+
+    .navbar ul {
+
+        gap: 14px;
+    }
+
+
+    .navbar ul li a {
+
+        font-size: 13px;
+    }
+
+
+    .hero {
+
+        padding: 45px 15px;
+    }
+
+
+    .hero h1 {
+
+        font-size: 32px;
+    }
+
+
+    .hero p {
+
+        font-size: 16px;
+
+        line-height: 23px;
+    }
+
+
+    .glass-card {
+
+        padding: 25px;
+
+        min-height: 250px;
+    }
+
+
+    .login-container {
+
+        padding: 30px 10px 40px;
+    }
+
+
+    .login-left img {
+
+        max-width: 230px;
+    }
+
+
+    .login-right form {
+
+        padding: 22px 16px;
+    }
+
+
+    .login-right h2 {
+
+        font-size: 20px;
+    }
+
+
+    .login-right form > input,
+    .password-box input {
+
+        height: 50px;
+
+        font-size: 14px;
+    }
+
+
+    .login-right button {
+
+        height: 50px;
+
+        font-size: 16px;
+    }
+
+}

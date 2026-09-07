@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zyntra Files</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/files.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/topbar.css') }}">
+
+
+
+</head>
+
+<body>
+
+    {% include "includes/sidebar.html" %}
+    {% include "includes/topbar.html" %}
+
+<div class="main">
+
+    
+
+   <h1 class="page-title">
+    <i class="fa-solid fa-folder-open"></i>
+    My Files
+</h1>
+
+    <!-- Search -->
+
+    <form method="GET" action="/files" class="search-form">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search File..."
+            value="{{ request.args.get('search','') }}">
+
+        <button type="submit">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            Search
+
+        </button>
+
+    </form>
+
+    <!-- Upload -->
+
+    <div class="upload-box">
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <input
+                type="file"
+                name="file"
+                required>
+
+            <button type="submit">
+
+                <i class="fa-solid fa-upload"></i>
+
+                Upload File
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Files -->
+
+    <div class="files-grid">
+
+
+
+        {% for file in files %}
+
+        <div class="file-card">
+
+            <a href="/favorite-file/{{ file._id }}" class="favorite">
+
+{% if file.favorite %}
+
+<i class="fa-solid fa-star"></i>
+
+{% else %}
+
+<i class="fa-regular fa-star"></i>
+
+{% endif %}
+
+</a>
+
+{% if file.filetype == "PDF" %}
+
+<i class="fa-solid fa-file-pdf file-icon pdf"></i>
+
+{% elif file.filetype == "DOCX" or file.filetype == "DOC" %}
+
+<i class="fa-solid fa-file-word file-icon word"></i>
+
+{% elif file.filetype == "TXT" %}
+
+<i class="fa-solid fa-file-lines file-icon txt"></i>
+
+{% elif file.filetype == "PNG" or file.filetype == "JPG" or file.filetype == "JPEG" %}
+
+<i class="fa-solid fa-file-image file-icon image"></i>
+
+{% else %}
+
+<i class="fa-solid fa-file file-icon default"></i>
+
+{% endif %}
+            <h3>{{ file.filename }}</h3>
+
+            <p class="type">
+
+Type : {{ file.filetype }}
+
+</p>
+
+<p class="date">
+
+{{ file.uploaded_at }}
+
+</p>
+<div class="buttons">
+
+<a href="/view/{{ file.filename }}" class="view" target="_blank">
+<i class="fa-solid fa-eye"></i>
+View
+</a>
+
+<a href="/download/{{ file.filename }}" class="download">
+<i class="fa-solid fa-download"></i>
+Download
+</a>
+
+<a href="/delete-file/{{ file._id }}" class="delete">
+<i class="fa-solid fa-trash"></i>
+Delete
+</a>
+
+</div>
+        </div>
+
+        {% else %}
+
+       <div class="empty">
+
+    <i class="fa-solid fa-folder-open"></i>
+
+    <h2>No Files Uploaded</h2>
+
+    <p>Upload your first file to get started.</p>
+
+</div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

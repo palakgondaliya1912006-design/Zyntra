@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>Zyntra AI File Creator</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/ai_file_creator.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/topbar.css') }}">
+</head>
+
+<body>
+
+{% include "includes/sidebar.html" %}
+{% include "includes/topbar.html" %}
+
+<main class="file-creator-page">
+
+    <div class="creator-shell">
+
+        <!-- =========================
+             MAIN CREATOR CARD
+        ========================== -->
+        <section class="creator-card">
+
+            <div class="creator-heading">
+
+                <div class="heading-icon">
+                    <i class="fa-solid fa-file-circle-plus"></i>
+                </div>
+
+                <div class="heading-content">
+                    <h1>Zyntra AI File Creator</h1>
+
+                    <p>
+                        Create documents, code, spreadsheets and complete
+                        project files with AI.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 PROMPT
+            ========================== -->
+            <section class="prompt-section">
+
+                <div class="section-kicker">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    CREATE ANY FILE
+                </div>
+
+                <h2>What do you want to create?</h2>
+
+                <p class="section-description">
+                    Describe the file in your own words.
+                    Zyntra will generate the complete usable content.
+                </p>
+
+                <div class="prompt-box">
+
+                    <textarea
+                        id="filePrompt"
+                        maxlength="4000"
+                        placeholder="Example: Create a professional student marksheet with Name, Subject, Marks, Total and Grade."
+                    ></textarea>
+
+                    <span id="promptCount">0 / 4000</span>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 FILE OPTIONS
+            ========================== -->
+            <section class="options-grid">
+
+                <div class="field">
+
+                    <label for="fileType">
+                        File Type
+                    </label>
+
+                    <small>
+                        Choose a type or let Zyntra detect it.
+                    </small>
+
+                    <select id="fileType">
+
+                        <option value="auto">
+                            Auto Detect (Recommended)
+                        </option>
+
+                        <option value="pdf">PDF</option>
+                        <option value="docx">DOCX</option>
+                        <option value="xlsx">Excel XLSX</option>
+                        <option value="pptx">PowerPoint PPTX</option>
+
+                        <option value="html">HTML</option>
+                        <option value="css">CSS</option>
+                        <option value="js">JavaScript</option>
+                        <option value="ts">TypeScript</option>
+                        <option value="jsx">JSX</option>
+                        <option value="tsx">TSX</option>
+
+                        <option value="python">Python</option>
+                        <option value="c">C</option>
+                        <option value="cpp">C++</option>
+                        <option value="java">Java</option>
+                        <option value="php">PHP</option>
+                        <option value="sh">Shell</option>
+                        <option value="bat">Batch</option>
+
+                        <option value="json">JSON</option>
+                        <option value="xml">XML</option>
+                        <option value="yaml">YAML</option>
+                        <option value="yml">YAML</option>
+                        <option value="csv">CSV</option>
+                        <option value="sql">SQL</option>
+                        <option value="ini">INI</option>
+                        <option value="conf">CONFIG</option>
+                        <option value="env">ENV</option>
+
+                        <option value="txt">TXT</option>
+                        <option value="md">Markdown</option>
+                        <option value="log">LOG</option>
+                        <option value="zip">Project ZIP</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="fileName">
+                        File Name
+                    </label>
+
+                    <small>
+                        Give your generated file a name.
+                    </small>
+
+                    <div class="filename-input">
+
+                        <i class="fa-regular fa-file"></i>
+
+                        <input
+                            type="text"
+                            id="fileName"
+                            value="my_file"
+                            maxlength="100"
+                            autocomplete="off"
+                        >
+
+                        <span id="extension">.txt</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="outputFormat">
+                        Output Format
+                    </label>
+
+                    <small>
+                        Choose the generation style.
+                    </small>
+
+                    <select id="outputFormat">
+
+                        <option value="standard">
+                            Standard
+                        </option>
+
+                        <option value="professional">
+                            Professional
+                        </option>
+
+                        <option value="minimal">
+                            Minimal
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </section>
+
+
+            <div class="section-divider"></div>
+
+
+            <!-- =========================
+                 AI OPTIONS
+            ========================== -->
+            <section class="ai-options">
+
+                <h3>AI Options</h3>
+
+                <p>
+                    Fine-tune how Zyntra prepares your file.
+                </p>
+
+                <div class="ai-options-grid">
+
+                    <label class="option-card">
+
+                        <input
+                            type="checkbox"
+                            id="autoFormat"
+                            checked
+                        >
+
+                        <span class="check">
+                            <i class="fa-solid fa-check"></i>
+                        </span>
+
+                        <div class="option-content">
+
+                            <strong>Auto Format</strong>
+
+                            <small>
+                                Format the generated content cleanly.
+                            </small>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="option-card">
+
+                        <input
+                            type="checkbox"
+                            id="aiOptimize"
+                            checked
+                        >
+
+                        <span class="check">
+                            <i class="fa-solid fa-check"></i>
+                        </span>
+
+                        <div class="option-content">
+
+                            <strong>AI Optimize</strong>
+
+                            <small>
+                                Improve structure, quality and usability.
+                            </small>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="option-card">
+
+                        <input
+                            type="checkbox"
+                            id="professionalLayout"
+                            checked
+                        >
+
+                        <span class="check">
+                            <i class="fa-solid fa-check"></i>
+                        </span>
+
+                        <div class="option-content">
+
+                            <strong>Professional Layout</strong>
+
+                            <small>
+                                Use a polished layout where supported.
+                            </small>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 CREATE BUTTON
+            ========================== -->
+            <button
+                type="button"
+                id="createFileBtn"
+                class="create-btn"
+            >
+
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                <span>Create File</span>
+
+            </button>
+
+
+            <div
+                class="create-status"
+                id="createStatus"
+            >
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                Zyntra AI will create your file instantly
+
+            </div>
+
+
+            <!-- =========================
+                 RESULT
+            ========================== -->
+            <section
+                class="result-card"
+                id="resultCard"
+                hidden
+            >
+
+                <div class="result-top">
+
+                    <div class="success-icon">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+
+                    <div>
+
+                        <h3 id="resultTitle">
+                            File Created Successfully
+                        </h3>
+
+                        <p id="resultDescription">
+                            Your file is ready.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="result-actions">
+
+                    <a
+                        class="result-btn download-btn"
+                        id="downloadBtn"
+                        href="#"
+                    >
+
+                        <i class="fa-solid fa-download"></i>
+
+                        <span>Download</span>
+
+                    </a>
+
+
+                    <button
+                        type="button"
+                        class="result-btn preview-btn"
+                        id="previewBtn"
+                    >
+
+                        <i class="fa-solid fa-eye"></i>
+
+                        <span>Preview</span>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- =========================
+             RIGHT SIDEBAR
+             ONLY RECENT FILES
+        ========================== -->
+        <aside class="creator-side">
+
+            <section class="side-card recent-card">
+
+                <div class="side-title-row">
+
+                    <h2>
+                        <i class="fa-regular fa-clock"></i>
+                        Recent Creations
+                    </h2>
+
+                    <a href="/history">
+                        View All
+                    </a>
+
+                </div>
+
+
+                <div class="recent-list">
+
+                    {% if recent_creations %}
+
+                        {% for item in recent_creations %}
+
+                        <div class="recent-file">
+
+                            <div class="recent-file-icon">
+
+                                <i class="{{ item.icon_class }}"></i>
+
+                            </div>
+
+
+                            <div class="recent-file-info">
+
+                                <strong
+                                    title="{{ item.filename }}"
+                                >
+                                    {{ item.filename }}
+                                </strong>
+
+                                <small>
+                                    {{ item.type_label }}
+                                </small>
+
+                            </div>
+
+
+                            <span class="recent-time">
+                                {{ item.time_text }}
+                            </span>
+
+                        </div>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <div class="recent-empty">
+
+                            <div class="empty-folder-icon">
+                                <i class="fa-regular fa-folder-open"></i>
+                            </div>
+
+                            <strong>
+                                No files created yet
+                            </strong>
+
+                            <span>
+                                Your recently generated files
+                                will appear here.
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <a
+                    class="history-btn"
+                    href="/history"
+                >
+
+                    <span>
+                        View All History
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </section>
+
+        </aside>
+
+    </div>
+
+</main>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script src="{{ url_for('static', filename='js/ai_file_creator.js') }}"></script>
+
+</body>
+</html>

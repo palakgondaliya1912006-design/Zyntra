@@ -1,0 +1,294 @@
+<div class="topbar">
+
+    <!-- LEFT -->
+    <div class="top-left">
+
+        <button
+            id="menuBtn"
+            class="menu-btn"
+            type="button"
+            aria-label="Open menu"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            alt="Zyntra Logo"
+        >
+
+    </div>
+
+
+    <!-- CENTER DATE -->
+    <div class="top-date">
+
+        <i class="fa-regular fa-calendar"></i>
+
+        <span id="currentDate"></span>
+
+    </div>
+
+
+    <!-- RIGHT -->
+    <div class="top-right">
+
+
+        <!-- NOTIFICATION -->
+        <div class="notification-wrapper">
+
+            <button
+                class="notification-btn"
+                id="notificationBtn"
+                type="button"
+                title="Notifications"
+            >
+
+                <i class="fa-solid fa-bell"></i>
+
+                {% if notification_count > 0 %}
+                    <span class="notification-dot"></span>
+                {% endif %}
+
+            </button>
+
+
+            <!-- NOTIFICATION PANEL -->
+            <div
+                class="notification-panel"
+                id="notificationPanel"
+            >
+
+                <div class="notification-header">
+
+                    <h3>Notifications</h3>
+
+                    <span>
+                        {{ notification_count }}
+                    </span>
+
+                </div>
+
+
+                {% if notification_count > 0 %}
+
+
+                    {% if pending_tasks > 0 %}
+
+                    <div class="notification-item">
+
+                        <div class="notification-icon task-icon">
+
+                            <i class="fa-solid fa-list-check"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>Pending Tasks</strong>
+
+                            <p>
+                                You have {{ pending_tasks }}
+                                pending task{% if pending_tasks != 1 %}s{% endif %}.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    {% if total_events > 0 %}
+
+                    <div class="notification-item">
+
+                        <div class="notification-icon event-icon">
+
+                            <i class="fa-solid fa-calendar-days"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>Events</strong>
+
+                            <p>
+                                You have {{ total_events }}
+                                event{% if total_events != 1 %}s{% endif %}.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    {% if total_notes > 0 %}
+
+                    <div class="notification-item">
+
+                        <div class="notification-icon note-icon">
+
+                            <i class="fa-solid fa-note-sticky"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>Notes</strong>
+
+                            <p>
+                                You have {{ total_notes }}
+                                note{% if total_notes != 1 %}s{% endif %}.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+
+                {% else %}
+
+                    <div class="no-notification">
+
+                        <i class="fa-regular fa-bell-slash"></i>
+
+                        <p>No new notifications</p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- PROFILE -->
+        <a
+            href="/profile"
+            class="profile-btn"
+            title="Profile"
+        >
+
+            {% if current_user and current_user.profile_image %}
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/profiles/' + current_user.profile_image
+                    ) }}"
+                    alt="Profile"
+                >
+
+            {% else %}
+
+                <div class="profile-default">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+            {% endif %}
+
+        </a>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ================= DATE ================= */
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const currentDate = document.getElementById("currentDate");
+
+    if(currentDate){
+
+        const today = new Date();
+
+        currentDate.textContent =
+            today.toLocaleDateString("en-IN", {
+
+                weekday: "long",
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+
+            });
+
+    }
+
+});
+
+
+/* ================= MOBILE SIDEBAR ================= */
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const menuBtn = document.getElementById("menuBtn");
+
+    const sidebar = document.querySelector(".sidebar");
+
+
+    if(menuBtn && sidebar){
+
+        menuBtn.addEventListener("click", function(){
+
+            sidebar.classList.toggle("show");
+
+        });
+
+    }
+
+});
+
+
+/* ================= NOTIFICATION ================= */
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const notificationBtn =
+        document.getElementById("notificationBtn");
+
+    const notificationPanel =
+        document.getElementById("notificationPanel");
+
+
+    if(notificationBtn && notificationPanel){
+
+        notificationBtn.addEventListener("click", function(event){
+
+            event.stopPropagation();
+
+            notificationPanel.classList.toggle("show");
+
+        });
+
+
+        document.addEventListener("click", function(event){
+
+            if(
+                !notificationPanel.contains(event.target) &&
+                !notificationBtn.contains(event.target)
+            ){
+
+                notificationPanel.classList.remove("show");
+
+            }
+
+        });
+
+    }
+
+});
+
+</script>

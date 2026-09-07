@@ -1,0 +1,868 @@
+/* ================= RESET ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+/* ================= BODY ================= */
+
+body{
+
+    margin:0;
+    padding:0;
+
+    min-height:100vh;
+
+    background:linear-gradient(
+        135deg,
+        #0f172a,
+        #1e3a8a,
+        #312e81
+    );
+
+    color:white;
+
+}
+
+
+/* ================= MAIN ================= */
+
+.main{
+
+    margin-left:260px;
+
+    margin-top:70px;
+
+    padding:30px;
+
+    min-height:calc(100vh - 70px);
+
+}
+
+
+/* ================= PAGE TITLE ================= */
+
+.page-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    font-size:34px;
+
+    margin-bottom:25px;
+
+}
+
+.page-title i{
+
+    color:#60a5fa;
+
+}
+
+
+/* ================= SEARCH ================= */
+
+.search-form{
+
+    width:100%;
+
+    max-width:850px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:30px;
+
+}
+
+
+.search-form input{
+
+    flex:1;
+
+    min-width:0;
+
+    height:48px;
+
+    padding:0 16px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:12px;
+
+    outline:none;
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    font-size:15px;
+
+}
+
+
+.search-form input::placeholder{
+
+    color:#94a3b8;
+
+}
+
+
+.search-form input:focus{
+
+    border-color:#60a5fa;
+
+    box-shadow:0 0 0 2px rgba(96,165,250,.15);
+
+}
+
+
+.search-form button{
+
+    height:48px;
+
+    padding:0 20px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#4f46e5;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    transition:.3s;
+
+}
+
+
+.search-form button:hover{
+
+    background:#6366f1;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* ================= ADD NOTE ================= */
+
+.add-note{
+
+    width:100%;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    padding:25px;
+
+    border-radius:20px;
+
+    margin-bottom:30px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+}
+
+
+.add-note form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+.add-note input,
+.add-note textarea{
+
+    width:100%;
+
+    padding:14px 15px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:12px;
+
+    outline:none;
+
+    background:rgba(15,23,42,.60);
+
+    color:white;
+
+    font-size:15px;
+
+}
+
+
+.add-note input::placeholder,
+.add-note textarea::placeholder{
+
+    color:#94a3b8;
+
+}
+
+
+.add-note input:focus,
+.add-note textarea:focus{
+
+    border-color:#60a5fa;
+
+    box-shadow:0 0 0 2px rgba(96,165,250,.15);
+
+}
+
+
+.add-note textarea{
+
+    height:150px;
+
+    resize:vertical;
+
+    min-height:120px;
+
+}
+
+
+.add-note button{
+
+    width:max-content;
+
+    min-width:150px;
+
+    padding:13px 22px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#4f46e5;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    transition:.3s;
+
+}
+
+
+.add-note button:hover{
+
+    background:#6366f1;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* ================= NOTES GRID ================= */
+
+.notes-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(280px,1fr));
+
+    gap:22px;
+
+}
+
+
+/* ================= NOTE CARD ================= */
+
+.note-card{
+
+    min-width:0;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:18px;
+
+    padding:22px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+    transition:.3s;
+
+}
+
+
+.note-card:hover{
+
+    transform:translateY(-5px);
+
+    background:rgba(255,255,255,.12);
+
+}
+
+
+.note-card h2{
+
+    margin-bottom:12px;
+
+    color:#f8fafc;
+
+    font-size:20px;
+
+    overflow-wrap:anywhere;
+
+}
+
+
+.note-card p{
+
+    color:#cbd5e1;
+
+    line-height:1.6;
+
+    min-height:75px;
+
+    overflow-wrap:anywhere;
+
+}
+
+
+.note-time{
+
+    display:block;
+
+    margin-top:15px;
+
+    color:#94a3b8;
+
+    font-size:13px;
+
+}
+
+
+/* ================= NOTE FOOTER ================= */
+
+.note-footer{
+
+    margin-top:20px;
+
+    padding-top:15px;
+
+    border-top:1px solid rgba(255,255,255,.10);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+}
+
+
+/* ================= EDIT / DELETE ================= */
+
+.edit,
+.delete{
+
+    flex:1;
+
+    min-height:40px;
+
+    padding:10px 14px;
+
+    border-radius:10px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:14px;
+
+    transition:.3s;
+
+}
+
+
+.edit{
+
+    background:#2563eb;
+
+}
+
+
+.edit:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+}
+
+
+.delete{
+
+    background:#dc2626;
+
+}
+
+
+.delete:hover{
+
+    background:#b91c1c;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* ================================================= */
+/* ================= EDIT NOTE PAGE ================ */
+/* ================================================= */
+
+.container{
+
+    width:100%;
+
+    max-width:800px;
+
+    margin:0 auto;
+
+    padding:30px;
+
+}
+
+
+.container > h1{
+
+    color:white;
+
+    font-size:34px;
+
+    margin-bottom:25px;
+
+}
+
+
+.container .add-note{
+
+    margin-bottom:25px;
+
+}
+
+
+.container .add-note textarea{
+
+    height:220px;
+
+    resize:vertical;
+
+}
+
+
+.container .add-note button{
+
+    min-width:180px;
+
+}
+
+
+/* ================= BACK BUTTON ================= */
+
+.back-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:12px 20px;
+
+    background:#2563eb;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+
+.back-btn:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* ================================================= */
+/* ================= TABLET ======================== */
+/* ================================================= */
+
+@media screen and (max-width:1100px){
+
+    .main{
+
+        padding:25px;
+
+    }
+
+    .notes-grid{
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+    }
+
+}
+
+
+/* ================================================= */
+/* ================= MOBILE ======================== */
+/* ================================================= */
+
+@media screen and (max-width:768px){
+
+    .main{
+
+        margin-left:0 !important;
+
+        margin-top:70px !important;
+
+        padding:20px 15px;
+
+        min-height:calc(100vh - 70px);
+
+    }
+
+
+    .page-title{
+
+        font-size:28px;
+
+        margin-bottom:20px;
+
+    }
+
+
+    /* Search */
+
+    .search-form{
+
+        width:100%;
+
+        margin-bottom:25px;
+
+    }
+
+
+    .search-form input{
+
+        width:100%;
+
+    }
+
+
+    .search-form button{
+
+        padding:0 15px;
+
+        flex-shrink:0;
+
+    }
+
+
+    /* Add note */
+
+    .add-note{
+
+        padding:20px;
+
+        border-radius:17px;
+
+    }
+
+
+    .add-note button{
+
+        width:100%;
+
+    }
+
+
+    /* Notes */
+
+    .notes-grid{
+
+        grid-template-columns:1fr;
+
+        gap:18px;
+
+    }
+
+
+    .note-card{
+
+        padding:20px;
+
+    }
+
+
+    /* Edit page */
+
+    .container{
+
+        width:100%;
+
+        padding:20px 15px;
+
+    }
+
+
+    .container > h1{
+
+        font-size:28px;
+
+    }
+
+
+    .container .add-note{
+
+        padding:20px;
+
+    }
+
+
+    .container .add-note button{
+
+        width:100%;
+
+    }
+
+
+    .back-btn{
+
+        width:100%;
+
+    }
+
+}
+
+
+/* ================================================= */
+/* ================= SMALL PHONE =================== */
+/* ================================================= */
+
+@media screen and (max-width:480px){
+
+    .main{
+
+        padding:15px 12px;
+
+    }
+
+
+    .page-title{
+
+        font-size:24px;
+
+    }
+
+
+    /* Search becomes vertical */
+
+    .search-form{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+
+    .search-form input{
+
+        width:100%;
+
+        height:46px;
+
+    }
+
+
+    .search-form button{
+
+        width:100%;
+
+        height:46px;
+
+    }
+
+
+    .add-note{
+
+        padding:17px;
+
+        border-radius:16px;
+
+    }
+
+
+    .note-card{
+
+        padding:17px;
+
+    }
+
+
+    .note-card h2{
+
+        font-size:18px;
+
+    }
+
+
+    .note-footer{
+
+        flex-direction:column;
+
+    }
+
+
+    .edit,
+    .delete{
+
+        width:100%;
+
+    }
+
+
+    /* Edit page */
+
+    .container{
+
+        padding:15px 12px;
+
+    }
+
+
+    .container > h1{
+
+        font-size:24px;
+
+    }
+
+}
+
+/* ================= MOBILE SEARCH ================= */
+
+@media screen and (max-width:480px){
+
+    .search-form{
+
+        display:flex;
+
+        flex-direction:row !important;
+
+        align-items:center;
+
+        gap:8px;
+
+        width:100%;
+
+        margin-bottom:25px;
+
+    }
+
+    .search-form input{
+
+        flex:1;
+
+        width:auto !important;
+
+        min-width:0;
+
+        height:46px;
+
+        padding:0 14px;
+
+        font-size:15px;
+
+    }
+
+    .search-form button{
+
+        width:auto !important;
+
+        min-width:105px;
+
+        height:46px;
+
+        padding:0 15px;
+
+        flex-shrink:0;
+
+        font-size:15px;
+
+    }
+
+}

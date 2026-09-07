@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zyntra Tasks</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/tasks.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/topbar.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    {% include "includes/sidebar.html" %}
+    {% include "includes/topbar.html" %}
+
+
+    <main class="main">
+
+        <!-- PAGE TITLE -->
+
+        <h1 class="page-title">
+
+            <i class="fa-solid fa-list-check"></i>
+
+            My Tasks
+
+        </h1>
+
+
+        <!-- ================= STATS ================= -->
+
+        <div class="task-stats">
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-list-check"></i>
+
+                <h2>{{ total_tasks }}</h2>
+
+                <p>Total Tasks</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <h2>{{ completed_tasks }}</h2>
+
+                <p>Completed</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-spinner"></i>
+
+                <h2>{{ in_progress_tasks }}</h2>
+
+                <p>In Progress</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <i class="fa-solid fa-clock"></i>
+
+                <h2>{{ pending_tasks }}</h2>
+
+                <p>Pending</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= SEARCH ================= -->
+
+        <form method="GET" class="search-form">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search Task..."
+                    value="{{ request.args.get('search','') }}">
+
+            </div>
+
+
+            <button type="submit">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                Search
+
+            </button>
+
+        </form>
+
+
+        <!-- ================= ADD TASK ================= -->
+
+        <div class="add-task">
+
+            <form method="POST">
+
+                <input
+                    type="text"
+                    name="task"
+                    placeholder="Enter Task"
+                    required>
+
+
+                <button type="submit">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Task
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- ================= TASK LIST ================= -->
+
+        <div class="task-list">
+
+            {% for task in tasks %}
+
+            <div class="task-card">
+
+
+                <div class="task-title">
+
+                    <h3>
+                        {{ task.task }}
+                    </h3>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                {% if task.status == "Completed" %}
+
+                    <span class="status completed-status">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Completed
+
+                    </span>
+
+
+                {% elif task.status == "In Progress" %}
+
+                    <span class="status progress-status">
+
+                        <i class="fa-solid fa-spinner"></i>
+
+                        In Progress
+
+                    </span>
+
+
+                {% else %}
+
+                    <span class="status pending-status">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        Pending
+
+                    </span>
+
+                {% endif %}
+
+
+                <!-- BUTTONS -->
+
+                <div class="buttons">
+
+                    <a
+                        href="/edit-task/{{ task._id }}"
+                        class="edit">
+
+                        <i class="fa-solid fa-pen"></i>
+
+                        Edit
+
+                    </a>
+
+
+                    <a
+                        href="/delete-task/{{ task._id }}"
+                        class="delete">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                        Delete
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

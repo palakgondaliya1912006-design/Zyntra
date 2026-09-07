@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zyntra Calendar</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/calendar.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel="stylesheet"
+    href="{{ url_for('static', filename='css/topbar.css') }}">
+
+
+</head>
+
+<body>
+
+{% include "includes/sidebar.html" %}
+{% include "includes/topbar.html" %}
+
+<div class="main">
+
+<h1 class="page-title">
+<i class="fa-solid fa-calendar-days"></i>
+Calendar
+</h1>
+
+<div class="calendar-container">
+
+<div class="add-event">
+
+<h2>Add Event</h2>
+
+<form method="POST" action="/add-event">
+
+<input
+type="text"
+name="title"
+placeholder="Event Title"
+required>
+
+<textarea
+name="description"
+placeholder="Description"></textarea>
+
+<input
+type="date"
+name="date"
+required>
+
+<input
+type="time"
+name="time"
+required>
+
+<button type="submit">
+
+<i class="fa-solid fa-plus"></i>
+
+Add Event
+
+</button>
+
+</form>
+
+</div>
+
+<div class="event-list">
+
+<h2>Upcoming Events</h2>
+
+{% if events %}
+
+{% for event in events %}
+
+<div class="event-card">
+
+<div>
+
+<h3>{{ event.title }}</h3>
+
+<p>{{ event.description }}</p>
+
+<span>
+📅 {{ event.date }}
+&nbsp;&nbsp;
+🕒 {{ event.time }}
+</span>
+
+</div>
+
+<div class="event-buttons">
+
+<a href="/edit-event/{{ event._id }}" class="edit-btn">
+
+<i class="fa-solid fa-pen"></i>
+
+</a>
+
+<a href="/delete-event/{{ event._id }}" class="delete-btn">
+
+<i class="fa-solid fa-trash"></i>
+
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<p>No Events Found</p>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

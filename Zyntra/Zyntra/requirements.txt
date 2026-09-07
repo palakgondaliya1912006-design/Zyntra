@@ -1,0 +1,15 @@
+Flask
+pymongo
+python-dotenv
+Werkzeug
+groq
+google-genai
+openai
+pandas
+PyMuPDF
+pytesseract
+python-docx
+python-pptx
+openpyxl
+Pillow
+reportlab

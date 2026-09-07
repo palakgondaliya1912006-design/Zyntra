@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Profile | Zyntra</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/edit_profile.css') }}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/topbar.css') }}">
+
+
+</head>
+
+<body>
+
+    {% include "includes/topbar.html" %}
+
+<div class="container">
+
+
+
+    <div class="card">
+
+        <h1>
+            <i class="fa-solid fa-user-pen"></i>
+            Edit Profile
+        </h1>
+
+        <form method="POST">
+
+            <div class="input-box">
+
+                <label>Full Name</label>
+
+                <input
+                    type="text"
+                    name="fullname"
+                    value="{{ user.fullname }}"
+                    readonly>
+
+            </div>
+
+            <div class="input-box">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    value="{{ user.email }}"
+                    readonly>
+
+            </div>
+
+            <div class="input-box">
+
+                <label>Mobile Number</label>
+
+                <input
+                    type="text"
+                    name="phone"
+                    value="{{ user.phone }}">
+
+            </div>
+
+            <div class="input-box">
+
+                <label>Bio</label>
+
+                <textarea
+                    name="bio"
+                    rows="5">{{ user.bio }}</textarea>
+
+            </div>
+
+            <button type="submit">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Save Changes
+
+            </button>
+
+
+            <button type="submit">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back To Profile
+
+            </button>
+
+            
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

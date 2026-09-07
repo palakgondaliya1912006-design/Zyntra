@@ -1,0 +1,681 @@
+/* ================= RESET ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+/* ================= BODY ================= */
+
+body{
+    margin:0;
+    padding:0;
+
+    background:linear-gradient(
+        135deg,
+        #0f172a,
+        #1e3a8a,
+        #312e81
+    );
+
+    color:white;
+
+    min-height:100vh;
+}
+
+
+/* ================= MAIN ================= */
+
+.main{
+
+    margin-left:260px;
+
+    margin-top:70px;
+
+    padding:30px;
+
+    min-height:calc(100vh - 70px);
+
+}
+
+
+/* ================= PAGE TITLE ================= */
+
+.page-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    font-size:34px;
+
+    margin-bottom:25px;
+
+}
+
+.page-title i{
+
+    color:#60a5fa;
+
+}
+
+
+/* ================= CALENDAR CONTAINER ================= */
+
+.calendar-container{
+
+    display:grid;
+
+    grid-template-columns:350px minmax(0,1fr);
+
+    gap:25px;
+
+    align-items:start;
+
+}
+
+
+/* ================= COMMON BOX ================= */
+
+.add-event,
+.event-list{
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+}
+
+
+/* ================= ADD EVENT ================= */
+
+.add-event{
+
+    position:sticky;
+
+    top:95px;
+
+}
+
+
+.add-event h2,
+.event-list h2{
+
+    margin:0 0 20px;
+
+    font-size:22px;
+
+}
+
+
+/* ================= FORM ================= */
+
+.add-event form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+.add-event input,
+.add-event textarea{
+
+    width:100%;
+
+    padding:14px 15px;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    border-radius:12px;
+
+    outline:none;
+
+    background:rgba(15,23,42,.65);
+
+    color:white;
+
+    font-size:15px;
+
+}
+
+
+.add-event input::placeholder,
+.add-event textarea::placeholder{
+
+    color:#94a3b8;
+
+}
+
+
+.add-event input:focus,
+.add-event textarea:focus{
+
+    border-color:#60a5fa;
+
+    box-shadow:0 0 0 2px rgba(96,165,250,.15);
+
+}
+
+
+.add-event textarea{
+
+    height:110px;
+
+    resize:none;
+
+}
+
+
+/* ================= ADD BUTTON ================= */
+
+.add-event button{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#4f46e5;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+.add-event button:hover{
+
+    background:#6366f1;
+
+    transform:translateY(-2px);
+
+}
+
+
+.add-event button i{
+
+    margin-right:7px;
+
+}
+
+
+/* ================= EVENT LIST ================= */
+
+.event-list{
+
+    min-width:0;
+
+}
+
+
+.event-list > p{
+
+    color:#cbd5e1;
+
+    padding:20px 0;
+
+}
+
+
+/* ================= EVENT CARD ================= */
+
+.event-card{
+
+    width:100%;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.10);
+
+    border-radius:15px;
+
+    padding:18px;
+
+    margin-bottom:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    transition:.3s;
+
+}
+
+
+.event-card:last-child{
+
+    margin-bottom:0;
+
+}
+
+
+.event-card:hover{
+
+    background:rgba(255,255,255,.13);
+
+    transform:translateY(-2px);
+
+}
+
+
+/* ================= EVENT CONTENT ================= */
+
+.event-card > div:first-child{
+
+    min-width:0;
+
+    flex:1;
+
+}
+
+
+.event-card h3{
+
+    margin:0 0 8px;
+
+    font-size:18px;
+
+    color:white;
+
+    overflow-wrap:anywhere;
+
+}
+
+
+.event-card p{
+
+    margin:0 0 10px;
+
+    color:#cbd5e1;
+
+    font-size:14px;
+
+    line-height:1.5;
+
+    overflow-wrap:anywhere;
+
+}
+
+
+.event-card span{
+
+    display:inline-block;
+
+    font-size:13px;
+
+    color:#94a3b8;
+
+}
+
+
+/* ================= EVENT BUTTONS ================= */
+
+.event-buttons{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    flex-shrink:0;
+
+}
+
+
+.edit-btn,
+.delete-btn{
+
+    width:40px;
+
+    height:40px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    color:white;
+
+    transition:.3s;
+
+}
+
+
+.edit-btn{
+
+    background:#3b82f6;
+
+}
+
+
+.delete-btn{
+
+    background:#ef4444;
+
+}
+
+
+.edit-btn:hover{
+
+    background:#2563eb;
+
+    transform:translateY(-2px);
+
+}
+
+
+.delete-btn:hover{
+
+    background:#dc2626;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* ================================================= */
+/* ================= TABLET ======================== */
+/* ================================================= */
+
+@media screen and (max-width:1100px){
+
+    .calendar-container{
+
+        grid-template-columns:300px minmax(0,1fr);
+
+        gap:20px;
+
+    }
+
+    .main{
+
+        padding:25px;
+
+    }
+
+}
+
+
+/* ================================================= */
+/* ================= MOBILE ======================== */
+/* ================================================= */
+
+@media screen and (max-width:768px){
+
+    .main{
+
+        margin-left:0 !important;
+
+        margin-top:70px !important;
+
+        padding:20px 15px;
+
+        min-height:calc(100vh - 70px);
+
+    }
+
+
+    .page-title{
+
+        font-size:28px;
+
+        margin-bottom:20px;
+
+    }
+
+
+    .calendar-container{
+
+        display:flex;
+
+        flex-direction:column;
+
+        gap:20px;
+
+    }
+
+
+    .add-event,
+    .event-list{
+
+        width:100%;
+
+        padding:20px;
+
+    }
+
+
+    .add-event{
+
+        position:static;
+
+    }
+
+
+    .add-event h2,
+    .event-list h2{
+
+        font-size:20px;
+
+    }
+
+
+    .event-card{
+
+        align-items:flex-start;
+
+        padding:15px;
+
+        gap:15px;
+
+    }
+
+
+    .event-card h3{
+
+        font-size:16px;
+
+    }
+
+
+    .event-card p{
+
+        font-size:13px;
+
+    }
+
+
+    .event-card span{
+
+        font-size:12px;
+
+        line-height:1.6;
+
+    }
+
+
+    .event-buttons{
+
+        gap:7px;
+
+    }
+
+
+    .edit-btn,
+    .delete-btn{
+
+        width:36px;
+
+        height:36px;
+
+    }
+
+}
+
+
+/* ================================================= */
+/* ================= SMALL PHONE =================== */
+/* ================================================= */
+
+@media screen and (max-width:480px){
+
+    .main{
+
+        padding:15px 12px;
+
+    }
+
+
+    .page-title{
+
+        font-size:24px;
+
+    }
+
+
+    .add-event,
+    .event-list{
+
+        padding:17px;
+
+        border-radius:16px;
+
+    }
+
+
+    .event-card{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+
+    .event-buttons{
+
+        width:100%;
+
+        justify-content:flex-end;
+
+    }
+
+
+    .edit-btn,
+    .delete-btn{
+
+        width:38px;
+
+        height:38px;
+
+    }
+
+}
+
+/* ================= EDIT EVENT ================= */
+
+.edit-event-page{
+
+    width:100%;
+
+}
+
+
+/* Edit Event form same calendar style */
+
+.edit-event-page .add-event{
+
+    width:100%;
+
+    max-width:600px;
+
+    margin:0 auto;
+
+}
+
+
+/* Edit Event button */
+
+.edit-event-page .add-event button{
+
+    background:#4f46e5;
+
+}
+
+
+.edit-event-page .add-event button:hover{
+
+    background:#6366f1;
+
+}
+
+
+/* ================= EDIT EVENT MOBILE ================= */
+
+@media screen and (max-width:768px){
+
+    .edit-event-page .add-event{
+
+        width:100%;
+
+        max-width:none;
+
+        margin:0;
+
+        padding:20px;
+
+    }
+
+}
+
+
+/* ================= SMALL PHONE ================= */
+
+@media screen and (max-width:480px){
+
+    .edit-event-page .add-event{
+
+        padding:17px;
+
+        border-radius:16px;
+
+    }
+
+}

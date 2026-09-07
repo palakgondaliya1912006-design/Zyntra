@@ -1,0 +1,254 @@
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+
+    position:fixed;
+
+    top:70px;
+    left:0;
+
+    width:260px;
+    height:calc(100vh - 70px);
+
+    background:linear-gradient(
+        135deg,
+        #0f172a,
+        #1e3a8a,
+        #312e81
+    );
+
+    padding:30px 20px;
+
+    display:flex;
+    flex-direction:column;
+
+    overflow-y:auto;
+    overflow-x:hidden;
+
+    z-index:1500;
+
+    box-sizing:border-box;
+
+}
+
+
+/* ================= MENU TITLE ================= */
+
+.menu-title{
+
+    color:#94a3b8;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    margin:10px 0 10px;
+
+}
+
+
+/* ================= LIST ================= */
+
+.sidebar ul{
+
+    list-style:none;
+
+    padding:0;
+    margin:0;
+
+}
+
+
+.sidebar ul li{
+
+    margin-bottom:5px;
+
+}
+
+
+/* ================= LINKS ================= */
+
+.sidebar ul li a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    text-decoration:none;
+
+    color:#e5e7eb;
+
+    padding:14px 16px;
+
+    border-radius:12px;
+
+    transition:.3s;
+
+    font-size:17px;
+
+}
+
+
+.sidebar ul li a:hover{
+
+    background:#4f46e5;
+
+    color:white;
+
+    transform:translateX(5px);
+
+}
+
+
+.sidebar ul li a i{
+
+    width:20px;
+
+    min-width:20px;
+
+    text-align:center;
+
+}
+
+
+/* ================= BOTTOM ================= */
+
+.bottom-menu{
+
+    margin-top:auto;
+
+    border-top:1px solid rgba(255,255,255,.15);
+
+    padding-top:20px;
+
+}
+
+
+.bottom-menu a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    text-decoration:none;
+
+    color:#ef4444;
+
+    font-size:17px;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    transition:.3s;
+
+}
+
+
+.bottom-menu a:hover{
+
+    background:#7f1d1d;
+
+    color:white;
+
+}
+
+
+.bottom-menu p{
+
+    text-align:center;
+
+    color:#6b7280;
+
+    margin-top:30px;
+
+    margin-bottom:10px;
+
+    font-size:13px;
+
+}
+
+
+/* ================= SCROLLBAR ================= */
+
+.sidebar::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+
+.sidebar::-webkit-scrollbar-track{
+
+    background:#16244d;
+
+}
+
+
+.sidebar::-webkit-scrollbar-thumb{
+
+    background:#6b7280;
+
+    border-radius:10px;
+
+}
+
+
+.sidebar::-webkit-scrollbar-thumb:hover{
+
+    background:#9ca3af;
+
+}
+
+
+/* ================================================= */
+/* ================= MOBILE ======================== */
+/* ================================================= */
+
+@media screen and (max-width:768px){
+
+    .sidebar{
+
+        top:70px;
+
+        left:-280px;
+
+        width:260px;
+
+        height:calc(100vh - 70px);
+
+        padding:25px 15px;
+
+        z-index:9999;
+
+        transition:left .3s ease;
+
+    }
+
+
+    /* OPEN SIDEBAR */
+
+    .sidebar.show{
+
+        left:0;
+
+    }
+
+
+    /* MAIN CONTENT */
+
+    .main{
+
+        margin-left:0 !important;
+
+        margin-top:70px !important;
+
+    }
+
+}

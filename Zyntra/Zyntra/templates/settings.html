@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | Zyntra</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/settings.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/topbar.css') }}">
+
+
+
+</head>
+
+<body>
+
+        {% include "includes/sidebar.html" %}
+        {% include "includes/topbar.html" %}
+
+<div class="container">
+    <div class="settings-card">
+
+        <h1>
+            <i class="fa-solid fa-gear"></i>
+            Settings
+        </h1>
+
+        <a href="/edit-profile" class="setting-link">
+
+    <div class="setting-item">
+
+        <i class="fa-solid fa-user"></i>
+
+        <span>Edit Profile</span>
+
+        <i class="fa-solid fa-angle-right"></i>
+
+    </div>
+
+</a>
+
+        
+
+      <a href="/change-password" class="setting-link">
+
+    <div class="setting-item">
+
+        <i class="fa-solid fa-lock"></i>
+
+        <span>Change Password</span>
+
+        <i class="fa-solid fa-angle-right"></i>
+
+    </div>
+
+</a>
+
+        
+        <a href="/about" class="setting-link">
+
+    <div class="setting-item">
+
+        <i class="fa-solid fa-circle-info"></i>
+
+        <span>About Zyntra</span>
+
+        <i class="fa-solid fa-angle-right"></i>
+
+    </div>
+
+</a>
+
+       <a href="/logout" class="setting-link">
+
+    <div class="setting-item">
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+        <span>Logout</span>
+
+        <i class="fa-solid fa-angle-right"></i>
+
+    </div>
+
+</a>
+
+</div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,677 @@
+/* =========================================================
+   ZYNTRA FILES - FINAL RESPONSIVE CSS
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a, #312e81);
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.main {
+    margin-left: 260px;
+    margin-top: 70px;
+    width: calc(100% - 260px);
+    min-height: calc(100vh - 70px);
+    padding: 35px 40px 50px;
+}
+
+/* Page container - DON'T use 90% width here */
+.main > * {
+    width: 100%;
+    max-width: none;
+}
+
+/* =========================================================
+   PAGE TITLE
+   ========================================================= */
+
+.main h1 {
+    font-size: 38px;
+    margin-bottom: 30px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.main h1 i {
+    color: #60a5fa;
+}
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.search-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.search-form input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    height: 52px;
+
+    padding: 0 18px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+
+    outline: none;
+
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+
+    font-size: 16px;
+
+    backdrop-filter: blur(15px);
+}
+
+.search-form input::placeholder {
+    color: #b7c1d6;
+}
+
+.search-form input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.18);
+}
+
+.search-form button {
+    flex: 0 0 120px;
+    height: 52px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #4f46e5;
+    color: #fff;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.search-form button:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
+}
+
+.search-form button i {
+    margin-right: 7px;
+}
+
+/* =========================================================
+   UPLOAD BOX
+   ========================================================= */
+
+.upload-box {
+    width: 100%;
+
+    padding: 24px;
+
+    margin-bottom: 35px;
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(20px);
+}
+
+.upload-box form {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* File chooser */
+
+.upload-box input[type="file"] {
+    flex: 1;
+    min-width: 0;
+
+    height: 52px;
+
+    padding: 7px 12px;
+
+    border-radius: 12px;
+
+    background: #172554;
+    color: #dbe4f5;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    font-size: 15px;
+}
+
+/* Upload button */
+
+.upload-box button {
+    flex: 0 0 160px;
+
+    height: 52px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #4f46e5;
+    color: #fff;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.upload-box button:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
+}
+
+.upload-box button i {
+    margin-right: 7px;
+}
+
+/* =========================================================
+   FILE GRID
+   ========================================================= */
+
+.files-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(280px, 1fr)
+    );
+
+    gap: 22px;
+
+    align-items: start;
+}
+
+/* =========================================================
+   FILE CARD
+   ========================================================= */
+
+.file-card {
+    position: relative;
+
+    width: 100%;
+    min-width: 0;
+
+    padding: 28px 22px 22px;
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+
+    text-align: center;
+
+    transition: 0.25s;
+
+    overflow: hidden;
+}
+
+.file-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.13);
+}
+
+/* =========================================================
+   FAVORITE
+   ========================================================= */
+
+.favorite {
+    position: absolute;
+
+    top: 16px;
+    right: 16px;
+
+    font-size: 25px;
+
+    color: #cbd5e1;
+
+    text-decoration: none;
+
+    z-index: 2;
+
+    transition: 0.2s;
+}
+
+.favorite:hover {
+    transform: scale(1.15);
+}
+
+.favorite .fa-solid {
+    color: #facc15;
+}
+
+.favorite .fa-regular {
+    color: #cbd5e1;
+}
+
+/* =========================================================
+   FILE ICON
+   ========================================================= */
+
+.file-icon {
+    font-size: 65px;
+    margin: 8px 0 18px;
+}
+
+.file-card .pdf {
+    color: #ef4444;
+}
+
+.file-card .word {
+    color: #3b82f6;
+}
+
+.file-card .txt {
+    color: #facc15;
+}
+
+.file-card .image {
+    color: #22c55e;
+}
+
+.file-card .default {
+    color: #a78bfa;
+}
+
+/* =========================================================
+   FILE NAME
+   ========================================================= */
+
+.file-card h3 {
+    width: 100%;
+
+    font-size: 18px;
+
+    margin-bottom: 12px;
+
+    line-height: 1.4;
+
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   TYPE
+   ========================================================= */
+
+.type {
+    color: #93c5fd;
+
+    font-size: 14px;
+
+    margin-bottom: 7px;
+}
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+.date {
+    color: #aebbd0;
+
+    font-size: 13px;
+
+    margin-bottom: 20px;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.buttons {
+    width: 100%;
+
+    display: flex;
+
+    gap: 8px;
+}
+
+.buttons a {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.buttons a:hover {
+    transform: translateY(-2px);
+}
+
+/* View */
+
+.view {
+    background: #16a34a;
+}
+
+.view:hover {
+    background: #15803d;
+}
+
+/* Download */
+
+.download {
+    background: #2563eb;
+}
+
+.download:hover {
+    background: #1d4ed8;
+}
+
+/* Delete */
+
+.delete {
+    background: #dc2626;
+}
+
+.delete:hover {
+    background: #b91c1c;
+}
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.empty {
+    width: 100%;
+
+    padding: 80px 20px;
+
+    text-align: center;
+
+    color: #94a3b8;
+}
+
+.empty i {
+    display: block;
+
+    font-size: 65px;
+
+    color: #6366f1;
+
+    margin-bottom: 18px;
+}
+
+.empty h2 {
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+/* =========================================================
+   LARGE LAPTOP / DESKTOP
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+    .main {
+        padding-left: 45px;
+        padding-right: 45px;
+    }
+
+    .files-grid {
+        grid-template-columns: repeat(
+            auto-fill,
+            minmax(300px, 1fr)
+        );
+    }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+
+        padding: 30px 22px 40px;
+    }
+
+    .files-grid {
+        grid-template-columns: repeat(
+            2,
+            minmax(0, 1fr)
+        );
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+
+        margin-top: 70px;
+
+        padding: 25px 18px 40px;
+    }
+
+    /* Title */
+
+    .main h1 {
+        font-size: 32px;
+
+        margin-bottom: 25px;
+
+        gap: 10px;
+    }
+
+    /* IMPORTANT:
+       Search input + Search button SAME ROW
+    */
+
+    .search-form {
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+
+        gap: 8px;
+
+        margin-bottom: 25px;
+    }
+
+    .search-form input {
+        flex: 1;
+
+        height: 48px;
+
+        padding: 0 13px;
+
+        font-size: 15px;
+    }
+
+    .search-form button {
+        flex: 0 0 105px;
+
+        width: 105px;
+        height: 48px;
+
+        padding: 0 8px;
+
+        font-size: 15px;
+    }
+
+    .search-form button i {
+        margin-right: 4px;
+    }
+
+    /* Upload */
+
+    .upload-box {
+        padding: 18px;
+
+        border-radius: 18px;
+
+        margin-bottom: 28px;
+    }
+
+    .upload-box form {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .upload-box input[type="file"] {
+        width: 100%;
+
+        height: 50px;
+    }
+
+    .upload-box button {
+        width: 100%;
+
+        flex: none;
+
+        height: 50px;
+    }
+
+    /* File cards */
+
+    .files-grid {
+        width: 100%;
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .file-card {
+        width: 100%;
+
+        padding: 28px 18px 20px;
+    }
+
+    .file-icon {
+        font-size: 62px;
+    }
+
+    .file-card h3 {
+        font-size: 17px;
+    }
+
+    /* Buttons remain SAME ROW */
+
+    .buttons {
+        display: flex;
+
+        flex-direction: row;
+
+        gap: 7px;
+    }
+
+    .buttons a {
+        height: 42px;
+
+        font-size: 13px;
+
+        padding: 0 5px;
+    }
+
+    .favorite {
+        top: 14px;
+        right: 14px;
+
+        font-size: 24px;
+    }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .main {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .main h1 {
+        font-size: 28px;
+    }
+
+    .search-form button {
+        flex: 0 0 92px;
+        width: 92px;
+
+        font-size: 14px;
+    }
+
+    .search-form input {
+        font-size: 14px;
+    }
+
+    .buttons a {
+        font-size: 12px;
+    }
+}

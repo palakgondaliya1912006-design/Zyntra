@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zyntra Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/topbar.css') }}">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/topbar.css') }}">
+
+
+</head>
+<body>
+
+    {% include "includes/topbar.html" %}
+    {% include "includes/sidebar.html" %}
+
+
+    <div class="main">
+
+        <div class="welcome">
+
+            <h1>Welcome Back, {{ fullname }} 👋</h1>
+
+            <p>Manage your Notes, Tasks, Files and AI Workspace.</p>
+
+        </div>
+
+        <!-- Dashboard Cards -->
+
+        <div class="dashboard-cards">
+
+            <div class="card">
+                <i class="fa-solid fa-note-sticky"></i>
+                <h2>{{ total_notes }}</h2>
+                <h3>Total Notes</h3>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-list-check"></i>
+                <h2>{{ total_tasks }}</h2>
+                <h3>Total Tasks</h3>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-circle-check"></i>
+                <h2>{{ completed_tasks }}</h2>
+                <h3>Completed</h3>
+            </div>
+
+            <div class="card">
+    <i class="fa-solid fa-calendar-days"></i>
+    <h2>{{ total_events }}</h2>
+    <h3>Events</h3>
+</div>
+
+            <div class="card">
+                <i class="fa-solid fa-folder-open"></i>
+                <h2>{{ total_files }}</h2>
+                <h3>Files</h3>
+            </div>
+
+        </div>
+
+      <div class="recent">
+
+    <!-- Recent Notes -->
+
+    <div class="box">
+
+    <h2>
+        <i class="fa-solid fa-note-sticky"></i>
+        Recent Notes
+    </h2>
+
+    {% if recent_notes %}
+
+        {% for note in recent_notes %}
+
+        <div class="note-item">
+
+            <div class="note-left">
+
+                <span class="note-icon">
+                    📄
+                </span>
+
+                <span class="note-title">
+                    {{ note.title }}
+                </span>
+
+            </div>
+
+            <span class="note-date">
+                {{ note.time_text }}
+            </span>
+
+        </div>
+
+        {% endfor %}
+
+        <a href="/notes" class="view-all">
+            View all notes →
+        </a>
+
+    {% else %}
+
+        <p>No Notes Available</p>
+
+    {% endif %}
+
+</div>
+
+    <!-- Chart -->
+
+   <div class="box">
+
+    <h2>
+        <i class="fa-solid fa-chart-pie"></i>
+        Task Overview
+    </h2>
+
+    <div class="chart-wrapper">
+
+        <div class="chart-box">
+            <canvas id="taskChart"></canvas>
+        </div>
+
+        <div style="flex:1;">
+
+            <p style="margin:18px 0;font-size:18px;">
+                <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin-right:10px;"></span>
+
+                Completed
+
+                <span style="float:right;">
+                    {{ completed_tasks }}
+                </span>
+            </p>
+
+            <p style="margin:18px 0;font-size:18px;">
+                <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#3b82f6;margin-right:10px;"></span>
+
+                In Progress
+
+                <span style="float:right;">
+                    {{ in_progress_tasks or 0 }}
+                </span>
+            </p>
+
+            <p style="margin:18px 0;font-size:18px;">
+                <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#f59e0b;margin-right:10px;"></span>
+
+                Pending
+
+                <span style="float:right;">
+                    {{ pending_tasks }}
+                </span>
+            </p>
+            <a href="/tasks" class="view-all">
+            View all tasks →
+        </a>
+
+        </div>
+        
+
+    </div>
+
+</div>
+      </div>
+
+<!-- Bottom Section -->
+
+<div class="bottom-section">
+
+    <!-- AI Widget -->
+
+    <div class="box ai-widget">
+
+        <h2>
+            <i class="fa-solid fa-robot"></i>
+            Zyntra AI
+        </h2>
+
+        <p>
+            How Can I help you today?
+        </p>
+
+        <a href="/ai-chat" class="ai-btn">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            Open AI Chat
+        </a>
+
+    </div>
+
+    <!-- Quick Access -->
+
+    <div class="box quick-box">
+
+        <h2>
+            <i class="fa-solid fa-bolt"></i>
+            Quick Access
+        </h2>
+
+        <div class="quick-links">
+
+            <a href="/notes">
+                <i class="fa-solid fa-note-sticky"></i>
+                <span>Add Note</span>
+            </a>
+
+            <a href="/tasks">
+                <i class="fa-solid fa-list-check"></i>
+                <span>Add Task</span>
+            </a>
+
+            <a href="/calendar">
+                <i class="fa-solid fa-calendar-plus"></i>
+                <span>Add Event</span>
+            </a>
+
+            <a href="/files">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Files</span>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+
+ const completed = parseInt("{{ completed_tasks|default(0) }}");
+ const pending = parseInt("{{ pending_tasks|default(0) }}");
+    const progress = parseInt("{{ in_progress_tasks|default(0) }}");
+
+const ctx = document.getElementById("taskChart");
+
+new Chart(ctx, {
+    type: "doughnut",
+
+    data: {
+        labels: ["Completed","In Progress","Pending"],
+
+        datasets: [{
+            data: [completed, progress, pending],
+
+            backgroundColor: [
+                "#22c55e",
+                "#3b82f6",
+                "#f59e0b"
+            ],
+
+            borderWidth: 0
+        }]
+    },
+
+    options: {
+        cutout: "65%",
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+</script>
+
+</body>
+
+</html>

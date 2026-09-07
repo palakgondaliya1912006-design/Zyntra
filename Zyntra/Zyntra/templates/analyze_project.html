@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zyntra AI Project Analyzer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/analyze_project.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/topbar.css') }}">
+
+
+</head>
+
+<body>
+
+    {% include "includes/topbar.html" %}
+
+<div class="container">
+
+    <a href="/ai-analyzer" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        AI Analyzer
+    </a>
+
+    <div class="heading">
+
+        <h1>
+            <i class="fa-solid fa-diagram-project"></i>
+            Zyntra AI Project Analyzer
+        </h1>
+
+        <p>
+            Upload your complete project (.zip) and let Zyntra AI analyze
+            your application professionally.
+        </p>
+
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <div class="upload-box">
+
+            <i class="fa-solid fa-folder-open upload-icon"></i>
+
+            <h2>Select Project (.ZIP)</h2>
+
+            <p>
+                Supported Format : ZIP Project
+            </p>
+
+            <input
+                type="file"
+                name="project"
+                accept=".zip"
+                required>
+
+        </div>
+
+        <button
+            id="analyzeBtn"
+            type="submit">
+
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+            Analyze Project
+
+        </button>
+
+    </form>
+
+    {% if filename %}
+
+    <div class="project-card">
+
+        <h3>
+
+            <i class="fa-solid fa-folder"></i>
+
+            Uploaded Project
+
+        </h3>
+
+        <p>{{ filename }}</p>
+
+    </div>
+
+    {% endif %}
+
+    {% if result %}
+
+    <div class="result-card">
+
+        <div class="result-header">
+
+            <h2>
+
+                <i class="fa-solid fa-robot"></i>
+
+                Zyntra AI Analysis
+
+            </h2>
+
+        </div>
+
+        <pre id="resultBox">{{ result }}</pre>
+
+        <div class="button-group">
+
+            <button
+                type="button"
+                class="copy-btn"
+                onclick="copyResult()">
+
+                <i class="fa-solid fa-copy"></i>
+
+                Copy
+
+            </button>
+
+            <button
+                type="button"
+                class="download-btn"
+                onclick="downloadResult()">
+
+                <i class="fa-solid fa-download"></i>
+
+                Download Report
+
+            </button>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+<script>
+
+document.querySelector("form").onsubmit=function(){
+
+const btn=document.getElementById("analyzeBtn");
+
+btn.innerHTML="<i class='fa-solid fa-spinner fa-spin'></i> AI is Analyzing...";
+
+btn.disabled=true;
+
+}
+
+function copyResult(){
+
+navigator.clipboard.writeText(document.getElementById("resultBox").innerText);
+
+alert("Copied Successfully");
+
+}
+
+function downloadResult(){
+
+const text=document.getElementById("resultBox").innerText;
+
+const blob=new Blob([text],{type:"text/plain"});
+
+const a=document.createElement("a");
+
+a.href=URL.createObjectURL(blob);
+
+a.download="Project_Analysis_Report.txt";
+
+a.click();
+
+}
+
+</script>
+
+</body>
+</html>

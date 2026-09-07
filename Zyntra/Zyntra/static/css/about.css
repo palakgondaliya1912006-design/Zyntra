@@ -1,0 +1,499 @@
+/* =====================================================
+   ZYNTRA ABOUT PAGE
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #1e3a8a,
+        #312e81
+    );
+
+    color: white;
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.main {
+    margin-left: 260px;
+    margin-top: 70px;
+    padding: 35px;
+    min-height: calc(100vh - 70px);
+
+    width: calc(100% - 260px);
+}
+
+
+/* =====================================================
+   ABOUT CARD
+===================================================== */
+
+.about-card {
+
+    width: 100%;
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.35);
+
+    border-radius: 20px;
+
+    padding: 45px;
+
+    text-align: center;
+
+    transition: 0.4s ease;
+}
+
+
+.about-card:hover {
+    transform: translateY(-4px);
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo {
+
+    font-size: 75px;
+
+    color: #3b82f6;
+
+    margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.about-card h1 {
+
+    font-size: 42px;
+
+    margin-bottom: 10px;
+
+    color: white;
+
+}
+
+
+/* =====================================================
+   TAGLINE
+===================================================== */
+
+.tagline {
+
+    color: #cbd5e1;
+
+    font-size: 18px;
+
+    margin-bottom: 25px;
+
+    line-height: 28px;
+}
+
+
+/* =====================================================
+   HR
+===================================================== */
+
+.about-card hr {
+
+    border: none;
+
+    height: 1px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    margin: 30px 0;
+}
+
+
+/* =====================================================
+   ABOUT CONTENT
+===================================================== */
+
+.about-content {
+
+    text-align: left;
+}
+
+
+.about-content h2 {
+
+    color: #60a5fa;
+
+    margin-bottom: 15px;
+
+    font-size: 28px;
+}
+
+
+.about-content p {
+
+    color: #d1d5db;
+
+    line-height: 30px;
+
+    margin-bottom: 18px;
+
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   INFO
+===================================================== */
+
+.info {
+
+    text-align: left;
+}
+
+
+.info p {
+
+    margin: 15px 0;
+
+    font-size: 17px;
+
+    color: #e5e7eb;
+
+    line-height: 26px;
+}
+
+
+.info strong {
+
+    color: #60a5fa;
+
+    display: inline-block;
+
+    width: 135px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+
+    text-align: center;
+}
+
+
+.footer p {
+
+    margin: 12px 0;
+
+    color: #9ca3af;
+
+    font-size: 16px;
+
+    line-height: 24px;
+}
+
+
+.footer strong {
+
+    color: white;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .main {
+
+        margin-left: 240px;
+
+        width: calc(100% - 240px);
+
+        padding: 25px;
+    }
+
+    .about-card {
+
+        max-width: 800px;
+
+        padding: 35px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    /* Sidebar mobile handle */
+    .sidebar {
+
+        position: fixed !important;
+
+        top: 70px !important;
+
+        left: -280px !important;
+
+        width: 260px !important;
+
+        height: calc(100vh - 70px) !important;
+
+        z-index: 9999 !important;
+
+        transition: left 0.3s ease !important;
+    }
+
+
+    .sidebar.show {
+
+        left: 0 !important;
+    }
+
+
+    /* MAIN */
+
+    .main {
+
+        margin-left: 0 !important;
+
+        margin-top: 70px !important;
+
+        width: 100% !important;
+
+        min-height: calc(100vh - 70px);
+
+        padding: 20px 15px !important;
+    }
+
+
+    /* ABOUT CARD */
+
+    .about-card {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        margin: 0;
+
+        padding: 28px 20px;
+
+        border-radius: 18px;
+    }
+
+
+    /* TITLE */
+
+    .about-card h1 {
+
+        font-size: 32px;
+
+        line-height: 40px;
+    }
+
+
+    /* LOGO */
+
+    .logo {
+
+        font-size: 58px;
+
+        margin-bottom: 15px;
+    }
+
+
+    /* TAGLINE */
+
+    .tagline {
+
+        font-size: 15px;
+
+        line-height: 24px;
+
+        margin-bottom: 20px;
+    }
+
+
+    /* HR */
+
+    .about-card hr {
+
+        margin: 22px 0;
+    }
+
+
+    /* ABOUT */
+
+    .about-content {
+
+        text-align: left;
+    }
+
+
+    .about-content h2 {
+
+        font-size: 23px;
+
+        margin-bottom: 12px;
+    }
+
+
+    .about-content p {
+
+        font-size: 15px;
+
+        line-height: 25px;
+
+        margin-bottom: 15px;
+    }
+
+
+    /* INFO */
+
+    .info {
+
+        text-align: left;
+    }
+
+
+    .info p {
+
+        font-size: 14px;
+
+        line-height: 23px;
+
+        margin: 13px 0;
+    }
+
+
+    .info strong {
+
+        width: auto;
+
+        display: block;
+
+        margin-bottom: 3px;
+    }
+
+
+    /* FOOTER */
+
+    .footer p {
+
+        font-size: 14px;
+
+        line-height: 22px;
+
+        margin: 9px 0;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+    .main {
+
+        padding: 15px 10px !important;
+    }
+
+
+    .about-card {
+
+        padding: 24px 16px;
+
+        border-radius: 16px;
+    }
+
+
+    .about-card h1 {
+
+        font-size: 28px;
+
+        line-height: 35px;
+    }
+
+
+    .logo {
+
+        font-size: 50px;
+    }
+
+
+    .tagline {
+
+        font-size: 14px;
+
+        line-height: 22px;
+    }
+
+
+    .about-content h2 {
+
+        font-size: 21px;
+    }
+
+
+    .about-content p {
+
+        font-size: 14px;
+
+        line-height: 23px;
+    }
+
+
+    .info p {
+
+        font-size: 13px;
+
+        line-height: 21px;
+    }
+
+
+    .footer p {
+
+        font-size: 13px;
+    }
+
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>About Zyntra</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/about.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/topbar.css') }}">
+
+
+
+</head>
+
+<body>
+
+       {% include "includes/topbar.html" %}
+    {% include "includes/sidebar.html" %}
+
+<div class="main">
+
+    <div class="about-card">
+
+
+        <h1>Zyntra AI</h1>
+
+        <p class="tagline">
+
+            Smart Productivity Platform Powered by Artificial Intelligence
+
+        </p>
+
+        <hr>
+
+        <div class="about-content">
+
+            <h2>About Zyntra</h2>
+
+            <p>
+
+                Zyntra is an AI-powered productivity platform designed to
+                simplify your daily workflow. It helps users manage Notes,
+                Tasks, Files, and AI tools from one secure dashboard.
+
+            </p>
+
+            <p>
+
+                Our mission is to make productivity faster, smarter,
+                and more organized with the help of Artificial Intelligence.
+
+            </p>
+
+        </div>
+
+        <hr>
+
+        <div class="info">
+
+            <p><strong>Version :</strong> 1.0.0</p>
+
+            <p><strong>Developer :</strong> Palak</p>
+
+            <p><strong>Technology :</strong> Python, Flask, MongoDB</p>
+
+            <p><strong>Frontend :</strong> HTML, CSS, JavaScript</p>
+
+            <p><strong>AI Model :</strong> Google Gemini 3.5 Flash,Grok llama-3.3-70b-versatile</p>
+
+            <p><strong>Release :</strong> 2026</p>
+
+        </div>
+
+        <hr>
+
+        <div class="footer">
+
+            <p>
+
+                Thank you for using <strong>Zyntra</strong> 
+
+            </p>
+
+            <p>
+
+                Developed with passion by <strong>Palak</strong>
+
+            </p>
+
+            <p>
+
+                © 2026 Zyntra. All Rights Reserved.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
