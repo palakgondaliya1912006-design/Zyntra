@@ -62,7 +62,7 @@ GENERATED_DIR.mkdir(
 
 
 # MongoDB Client
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient(os.getenv("MONGODB_URI"))
 db = client["Zyntra"]
 
 users = db["users"]
