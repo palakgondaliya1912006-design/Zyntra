@@ -8,7 +8,6 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 client = MongoClient("mongodb://localhost:27017/")
-
 db = client["Zyntra"]
 
 users = db["users"]
